@@ -1,15 +1,15 @@
 #include "DXUT.h"
-#include "IngameScene.h"
+#include "Stage_1_1.h"
 
-IngameScene::IngameScene()
+Stage_1_1::Stage_1_1()
 {
 }
 
-IngameScene::~IngameScene()
+Stage_1_1::~Stage_1_1()
 {
 }
 
-void IngameScene::Init()
+void Stage_1_1::Init()
 {
 	srand(time(NULL));
 	bullet = new cBulletAdmin();
@@ -24,23 +24,23 @@ void IngameScene::Init()
 	mob[3] = new mob_1(bullet->m_bullets, { 1600, 800 });
 }
 
-void IngameScene::Update()
+void Stage_1_1::Update()
 {
 	tile->Update();
 	player->Update(tile->pos);
 	boss->Update(tile->pos);
 	for (int i = 0; i < 4; i++) mob[i]->Update(tile->pos, tile->cell);
 	bullet->Update();
-	coll->Update(); 
+	coll->Update();
 }
 
-void IngameScene::Render()
+void Stage_1_1::Render()
 {
 	tile->Render();
 	player->Render();
 }
 
-void IngameScene::UIRender()
+void Stage_1_1::UIRender()
 {
 	tile->UIRender();
 	player->UIRender(tile->pos);
@@ -49,7 +49,7 @@ void IngameScene::UIRender()
 	bullet->Render();
 }
 
-void IngameScene::Release()
+void Stage_1_1::Release()
 {
 	SAFE_DELETE(player);
 	SAFE_DELETE(bullet);

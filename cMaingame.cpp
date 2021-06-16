@@ -3,6 +3,7 @@
 #include "TitleScene.h"
 #include "IngameScene.h"
 #include "EndScene.h"
+#include "Stage_1_1.h"
 
 cMaingame::cMaingame()
 {
@@ -18,6 +19,7 @@ void cMaingame::Init()
     SCENE->AddScene("TitleScene", new TitleScene);
     SCENE->AddScene("IngameScene", new IngameScene);
     SCENE->AddScene("EndScene", new EndScene);
+    SCENE->AddScene("Stage_1_1", new Stage_1_1);
     SCENE->ChangeScene("TitleScene");
     //CAMERA->Init();
 }
@@ -86,5 +88,6 @@ void cMaingame::AddResource()
 
     IMAGE->AddImage("boss", "boss/1-2boss_file", 14);
     IMAGE->AddImage("bullet", "bullet/bullet", 8);
+    IMAGE->AddImage("mob1", "mob1/mob1", 5);
 }
 

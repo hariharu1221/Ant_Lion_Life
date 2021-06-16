@@ -4,8 +4,9 @@ class Enemy
 {
 public:
 	float m_Hp;
+	Vec2 mob_p;
 
-	Enemy(vector<cBullet*>& bullet);
+	Enemy();
 	~Enemy();
 
 	virtual void Update(Vec2 m_pos);

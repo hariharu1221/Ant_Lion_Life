@@ -7,7 +7,7 @@
 #include "boss_1.h"
 #include "mob_1.h"
 
-class IngameScene :
+class Stage_1_1 :
 	public cScene
 {
 	cPlayer* player = nullptr;
@@ -20,8 +20,8 @@ class IngameScene :
 	int stage = 1;
 public:
 
-	IngameScene();
-	virtual ~IngameScene();
+	Stage_1_1();
+	virtual ~Stage_1_1();
 
 	virtual void Init();
 	virtual void Update();
@@ -29,4 +29,3 @@ public:
 	virtual void UIRender();
 	virtual void Release();
 };
-
