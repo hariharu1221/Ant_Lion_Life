@@ -167,9 +167,6 @@
     <ClCompile Include="cUIManager.cpp">
       <Filter>03: Manager\UI</Filter>
     </ClCompile>
-    <ClCompile Include="IngameScene.cpp">
-      <Filter>01: Scene</Filter>
-    </ClCompile>
     <ClCompile Include="cBullet.cpp">
       <Filter>02: Object\Bullet</Filter>
     </ClCompile>
@@ -274,9 +271,6 @@
     </ClInclude>
     <ClInclude Include="cUIManager.h">
       <Filter>03: Manager\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="IngameScene.h">
-      <Filter>01: Scene</Filter>
     </ClInclude>
     <ClInclude Include="cBullet.h">
       <Filter>02: Object\Bullet</Filter>

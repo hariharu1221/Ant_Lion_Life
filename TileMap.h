@@ -37,6 +37,8 @@ public:
 	vector<cTexture*> m_ani;
 	vector<cBullet*>& m_bullet;
 	vector<cTexture*> ani_bullet = IMAGE->MakeVecImg("bullet");
+	cTexture* stage_f;
+	cTexture* stage_c;
 
 	static D3DXCOLOR SaveImage[CELLSIZEX][CELLSIZEY];
 	static D3DXCOLOR Savebg[CELLSIZEX][CELLSIZEY];
@@ -55,7 +57,7 @@ public:
 	TileMap(vector<cBullet*>& m_bullet);
 	~TileMap();
 
-	void Init();
+	void Init(int stage = 1);
 	void Update();
 	void Render();
 	void UIRender();

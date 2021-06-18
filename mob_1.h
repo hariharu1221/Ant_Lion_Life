@@ -11,11 +11,11 @@ public:
 	float b_count = 4;
 
 	mob_1(vector<cBullet*>& bullet, Vec2 mob_p);
-	~mob_1();
+	virtual ~mob_1();
 
-	void Update(Vec2 m_pos, int cell[][CELLSIZEY]);
-	void Skill(Vec2 m_pos);
-	void Render();
-	void UIRender();
+	virtual void Update(Vec2 m_pos, int cell[][CELLSIZEY]);
+	virtual void Skill(Vec2 m_pos);
+	virtual void Render();
+	virtual void UIRender();
 };
 

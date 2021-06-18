@@ -408,7 +408,6 @@
     <ClCompile Include="cUIManager.cpp" />
     <ClCompile Include="EndScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="IngameScene.cpp" />
     <ClCompile Include="line.cpp" />
     <ClCompile Include="mob_1.cpp" />
     <ClCompile Include="mob_2.cpp" />
@@ -439,7 +438,6 @@
     <ClInclude Include="cUIManager.h" />
     <ClInclude Include="EndScene.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="IngameScene.h" />
     <ClInclude Include="line.h" />
     <ClInclude Include="mob_1.h" />
     <ClInclude Include="mob_2.h" />

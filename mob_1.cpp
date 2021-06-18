@@ -19,8 +19,10 @@ void mob_1::Update(Vec2 m_pos, int cell [][CELLSIZEY])
 	{
 		mob_1::~mob_1();
 	}
+
 	Skill(m_pos);
 }
+
 void mob_1::Skill(Vec2 m_pos)
 {
 	frame += Delta * 5;

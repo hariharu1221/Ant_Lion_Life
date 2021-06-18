@@ -6,6 +6,7 @@
 #include "cCollison.h"
 #include "boss_1.h"
 #include "mob_1.h"
+#include "mob_2.h"
 
 class Stage_1_1 :
 	public cScene

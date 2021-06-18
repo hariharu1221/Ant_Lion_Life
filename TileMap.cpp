@@ -17,45 +17,31 @@ int TileMap::cell[CELLSIZEX][CELLSIZEY] = { 0, };
 D3DXCOLOR TileMap::SaveImage[CELLSIZEX][CELLSIZEY];
 D3DXCOLOR TileMap::Savebg[CELLSIZEX][CELLSIZEY];
 
-void TileMap::Init()
+void TileMap::Init(int stage)
 {
+	switch (stage)
+	{
+	case 1:
+		stage_f = IMAGE->FindImage("stage_f");
+		stage_c = IMAGE->FindImage("stage_c");
+		break;
+	case 2:
+		stage_f = IMAGE->FindImage("stage_f");
+		stage_c = IMAGE->FindImage("stage_c");
+		break;
+	}
 	SetUp();
-
-	m_ani = IMAGE->MakeVecImg("boss");
-
-	D3DLOCKED_RECT lr, Tr;	
-	IMAGE->FindImage("stage_c")->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD); //clear img 저장
-	DWORD* pixel = (DWORD*)lr.pBits;
-	for (int y = CELLSIZEY - 1; y != -1; --y)
-	{
-		for (int x = CELLSIZEX - 1; x != -1; --x)
-		{
-			SaveImage[x][y] = pixel[y * CELLSIZEX + x];
-		}
-	}
-	IMAGE->FindImage("stage_c")->ptr->UnlockRect(0);
-
-	IMAGE->FindImage("stage_f")->ptr->LockRect(0, &Tr, 0, D3DLOCK_DISCARD); //front img 저장
-	pixel = (DWORD*)Tr.pBits;
-	for (int y = CELLSIZEY - 1; y != -1; --y)
-	{
-		for (int x = CELLSIZEX - 1; x != -1; --x)
-		{
-			Savebg[x][y] = pixel[y * CELLSIZEX + x];
-		}
-	}
-	IMAGE->FindImage("stage_f")->ptr->UnlockRect(0);
 }
 
 void TileMap::Update()
 {
 	if (hp <= 0 || timer <= 0) //죽으면
 	{
-		SetUp();
-		DrawArea();
 		IMAGE->ReloadImage("stage_c");
 		IMAGE->ReloadImage("stage_f");
 		SCENE->ChangeScene("TitleScene");
+		SetUp();
+		DrawArea();
 	}
 	Skill();
 	Move();
@@ -167,7 +153,7 @@ void TileMap::DrawLine()
 	IsDrawing = true;
 
 	D3DLOCKED_RECT lr;
-	IMAGE->FindImage("stage_f")->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
+	stage_f->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
 
 	DWORD* pixel = (DWORD*)lr.pBits;
 	POINT c = { pos.x - x_gap,pos.y - y_gap };
@@ -175,7 +161,7 @@ void TileMap::DrawLine()
 	cell[c.x][c.y] = 1;
 	pixel[index] = D3DCOLOR_RGBA(0, 255, 255, 255);
 
-	IMAGE->FindImage("stage_f")->ptr->UnlockRect(0);
+	stage_f->ptr->UnlockRect(0);
 }
 
 void TileMap::DrawArea(int draw_flag)
@@ -186,7 +172,7 @@ void TileMap::DrawArea(int draw_flag)
 	DrawArea(1);
 
 	D3DLOCKED_RECT lr;
-	IMAGE->FindImage("stage_f")->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
+	stage_f->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
 	DWORD* pixel = (DWORD*)lr.pBits;
 
 	for (int y = CELLSIZEY - 1; y != -1; --y)
@@ -234,7 +220,7 @@ void TileMap::DrawArea(int draw_flag)
 	}
 
 	DrawArea(1);
-	IMAGE->FindImage("stage_f")->ptr->UnlockRect(0);
+	stage_f->ptr->UnlockRect(0);
 
 	if (draw_flag == 0)
 		AutoFill();
@@ -365,8 +351,8 @@ void TileMap::Render()
 
 void TileMap::UIRender()
 {
-	UI->CenterRender(IMAGE->FindImage("stage_c"), CENTER, 1.2);
-	UI->CenterRender(IMAGE->FindImage("stage_f"), CENTER, 1);
+	UI->CenterRender(stage_c, CENTER, 1.2);
+	UI->CenterRender(stage_f, CENTER, 1);
 	if (damage)
 	{
 		UI->CenRender(ani_bullet[int(b_count)], stop_pos);
@@ -399,4 +385,29 @@ void TileMap::SetUp()
 	IsDrawing = false;
 	second = { 0,0 };
 	frame = 0;
+
+	m_ani = IMAGE->MakeVecImg("boss");
+
+	D3DLOCKED_RECT lr, Tr;
+	stage_c->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD); //clear img 저장
+	DWORD* pixel = (DWORD*)lr.pBits;
+	for (int y = CELLSIZEY - 1; y != -1; --y)
+	{
+		for (int x = CELLSIZEX - 1; x != -1; --x)
+		{
+			SaveImage[x][y] = pixel[y * CELLSIZEX + x];
+		}
+	}
+	stage_c->ptr->UnlockRect(0);
+
+	stage_f->ptr->LockRect(0, &Tr, 0, D3DLOCK_DISCARD); //front img 저장
+	pixel = (DWORD*)Tr.pBits;
+	for (int y = CELLSIZEY - 1; y != -1; --y)
+	{
+		for (int x = CELLSIZEX - 1; x != -1; --x)
+		{
+			Savebg[x][y] = pixel[y * CELLSIZEX + x];
+		}
+	}
+	stage_f->ptr->UnlockRect(0);
 }
