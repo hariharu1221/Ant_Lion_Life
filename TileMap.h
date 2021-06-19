@@ -4,8 +4,8 @@
 class TileMap
 {
 public:
-	int hp = 0;							// 개체 정보
-	int max_hp = 0;						//
+	int hp = 5;							// 개체 정보
+	int max_hp = 5;						//
 	int speed = 2;						//
 	Vec2 pos = Vec2(CENTER.x, float(B)); //
 	Vec2 stop_pos;
@@ -26,9 +26,10 @@ public:
 	float frame;
 	float bultime = 0;
 	float skilltime = 0;
-
 	float b_count = 4;
 	float b_time = 0;
+
+	int nowstage;
 
 	POINT cc;
 
@@ -57,7 +58,7 @@ public:
 	TileMap(vector<cBullet*>& m_bullet);
 	~TileMap();
 
-	void Init(int stage = 1);
+	void Init(int stage);
 	void Update();
 	void Render();
 	void UIRender();
@@ -68,6 +69,7 @@ public:
 	void DrawArea(int draw_flag = 0);
 	void AutoFill();
 	void SetUp();
+	void ChangeScene();
 
 	bool FloodFill(Vec2 pos, int target, int change);
 	bool Near(KeyState dir, int target);

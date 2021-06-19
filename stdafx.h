@@ -46,3 +46,7 @@ const int y_gap = (WINSIZEY - CELLSIZEY) / 2;
 #include "cInputManager.h"
 #include "cParticleManager.h"
 #include "cCameraManager.h"
+
+#include "Stage_1_0.h"
+#include "Stage_1_1.h"
+#include "TitleScene.h"

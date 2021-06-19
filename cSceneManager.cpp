@@ -51,6 +51,15 @@ void cSceneManager::ChangeScene(string key)
 	nextScene = find->second;
 }
 
+void cSceneManager::ReloadScnee(string key, cScene* scene)
+{
+	auto find = m_scenes.find(key);
+	auto temp = find->second;
+	SAFE_DELETE(temp);
+	m_scenes.erase(key);
+	m_scenes.insert(make_pair(key, scene));
+}
+
 void cSceneManager::PlayerInit()
 {
 	m_Hp = 6;

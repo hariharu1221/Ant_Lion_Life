@@ -19,8 +19,10 @@ D3DXCOLOR TileMap::Savebg[CELLSIZEX][CELLSIZEY];
 
 void TileMap::Init(int stage)
 {
+	nowstage = stage;
 	switch (stage)
 	{
+	case 0:
 	case 1:
 		stage_f = IMAGE->FindImage("stage_f");
 		stage_c = IMAGE->FindImage("stage_c");
@@ -31,18 +33,14 @@ void TileMap::Init(int stage)
 		break;
 	}
 	SetUp();
+	IsDrawing = true;
+	DrawArea();
+	IsDrawing = false;
 }
 
 void TileMap::Update()
 {
-	if (hp <= 0 || timer <= 0) //죽으면
-	{
-		IMAGE->ReloadImage("stage_c");
-		IMAGE->ReloadImage("stage_f");
-		SCENE->ChangeScene("TitleScene");
-		SetUp();
-		DrawArea();
-	}
+	ChangeScene();
 	Skill();
 	Move();
 	cc = { int(pos.x - x_gap), int(pos.y - y_gap) };
@@ -353,11 +351,15 @@ void TileMap::UIRender()
 {
 	UI->CenterRender(stage_c, CENTER, 1.2);
 	UI->CenterRender(stage_f, CENTER, 1);
-	if (damage)
-	{
-		UI->CenRender(ani_bullet[int(b_count)], stop_pos);
-	}
+	if (damage)	UI->CenRender(ani_bullet[int(b_count)], stop_pos);
+	RECT hpb = { 0,0,100 + hp * 80,50 };
+	UI->CropRender(IMAGE->FindImage("hp_bg"), Vec2(243, 825.5), hpb);
 
+
+	char str[256];
+	if (coloring_per < 10)  sprintf(str, "%.2f", (double)coloring_per);
+	else					sprintf(str, "%.1f", (double)coloring_per);
+	UI->PrintText(str, Vec2(200, 100), 100);
 }
 
 void TileMap::SetUp()
@@ -376,13 +378,10 @@ void TileMap::SetUp()
 	coloring_per = 0;
 	coloring_cells = 0;
 	temp = 0;
-	IsDrawing = true;
-	DrawArea();
 
-	hp = 10;
+	hp = 5;
 	speed = 4;
 	timer = 300;
-	IsDrawing = false;
 	second = { 0,0 };
 	frame = 0;
 
@@ -411,3 +410,37 @@ void TileMap::SetUp()
 	}
 	stage_f->ptr->UnlockRect(0);
 }
+
+void TileMap::ChangeScene()
+{
+	if (hp <= 0 || timer <= 0) //죽으면
+	{
+		IMAGE->ReloadImage("stage_c");
+		IMAGE->ReloadImage("stage_f");
+		stage_f = IMAGE->FindImage("stage_f");
+		stage_c = IMAGE->FindImage("stage_c");
+		SetUp();
+		DrawArea();
+		SCENE->ChangeScene("TitleScene");
+	}
+
+	if (coloring_per >= 80)
+	{
+		switch (nowstage)
+		{
+		case 0:
+			IMAGE->ReloadImage("stage_c");
+			IMAGE->ReloadImage("stage_f");
+			SCENE->ChangeScene("Stage_1_1");
+			break;
+		case 1:
+			IMAGE->ReloadImage("stage_c");
+			IMAGE->ReloadImage("stage_f");
+			SCENE->ChangeScene("TitleScene");
+			break;
+		}
+	}
+}
+
+//클리어시 이펙트
+//왼쪽위 버그 수정

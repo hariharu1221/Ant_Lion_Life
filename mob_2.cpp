@@ -13,11 +13,6 @@ mob_2::~mob_2()
 
 void mob_2::Update(Vec2 m_pos, int cell[][CELLSIZEY])
 {
-	if (cell[int(mob_p.x)][int(mob_p.y)] == 3)
-	{
-
-	}
-
 	Skill();  
 }
 

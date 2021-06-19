@@ -37,10 +37,9 @@ void cPlayer::Render()
 void cPlayer::UIRender(Vec2 m_pos)
 {
 	UI->CenterRender(IMAGE->FindImage("player"), Vec2(m_pos.x, m_pos.y));
-	UI->CenterRender(IMAGE->FindImage("hp_bg"), Vec2(243, 825.5));
 	for (int i = 0; i < m_Hp; i++)
 	{
-		UI->CenterRender(IMAGE->FindImage("hp"), Vec2(62.5 + i * 74, 824.5));
+		//UI->CenterRender(IMAGE->FindImage("hp"), Vec2(62.5 + i * 74, 824.5));
 	}
 	UI->CenterRender(IMAGE->FindImage("hp_hl"), Vec2(249.25, 825.5));
 }

@@ -12,10 +12,16 @@ TitleScene::~TitleScene()
 void TitleScene::Init()
 {
 	SCENE->PlayerInit();
+	set = true;
 }
 
 void TitleScene::Update()
 {
+	if (set)
+	{
+		SCENE->ReloadScnee("Stage_1_0", new Stage_1_0);
+		SCENE->ReloadScnee("Stage_1_1", new Stage_1_1);
+	}
 	if (option == false)
 	{
 		if (INPUT->KeyDown(VK_UP) && select > 1) { select--; }

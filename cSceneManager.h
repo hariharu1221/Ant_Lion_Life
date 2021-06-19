@@ -6,6 +6,7 @@ public:
 	map<string, cScene*> m_scenes;
 	cScene* nowScene = nullptr;
 	cScene* nextScene = nullptr;
+	map<string, cScene*> d_scenes;
 
 	cSceneManager();
 	~cSceneManager();
@@ -24,6 +25,7 @@ public:
 
 	void AddScene(string key, cScene* scene);
 	void ChangeScene(string key);
+	void ReloadScnee(string key, cScene* scene);
 
 	void PlayerInit();
 };

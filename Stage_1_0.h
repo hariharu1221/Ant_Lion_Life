@@ -15,9 +15,9 @@ class Stage_1_0 :
 	TileMap* tile = nullptr;
 	cCollison* coll = nullptr;
 	boss_1* boss = nullptr;
-	mob_2* mob[4] = { nullptr };
+	vector<mob_2*> mob;
 
-	int stage = 1;
+	int stage = 0;
 public:
 
 	Stage_1_0();
@@ -28,4 +28,5 @@ public:
 	virtual void Render();
 	virtual void UIRender();
 	virtual void Release();
+	virtual void M_Destroy();
 };

@@ -6,7 +6,6 @@
 #include "cCollison.h"
 #include "boss_1.h"
 #include "mob_1.h"
-#include "mob_2.h"
 
 class Stage_1_1 :
 	public cScene
@@ -16,7 +15,7 @@ class Stage_1_1 :
 	TileMap* tile = nullptr;
 	cCollison* coll = nullptr;
 	boss_1* boss = nullptr;
-	mob_1* mob[4] = { nullptr };
+	vector<mob_1*> mob;
 
 	int stage = 1;
 public:
@@ -29,4 +28,5 @@ public:
 	virtual void Render();
 	virtual void UIRender();
 	virtual void Release();
+	virtual void M_Destroy();
 };
