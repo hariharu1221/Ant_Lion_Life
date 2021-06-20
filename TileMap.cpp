@@ -444,3 +444,4 @@ void TileMap::ChangeScene()
 
 //클리어시 이펙트
 //왼쪽위 버그 수정
+//보스2 스킬 콜라이더

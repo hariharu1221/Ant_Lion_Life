@@ -5,7 +5,7 @@ class boss_1
 public:
 	vector<cBullet*>& m_bullet;
 	cTimer* playerAS = nullptr;
-	vector<cTexture*> m_ani = IMAGE->MakeVecImg("boss");
+	vector<cTexture*> m_ani = IMAGE->MakeVecImg("boss2");
 	Vec2 bpos = CENTER;
 
 	bool b_fire = true;

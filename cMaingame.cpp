@@ -87,6 +87,9 @@ void cMaingame::AddResource()
     IMAGE->AddImage("start game ready", "start game ready");
 
     IMAGE->AddImage("boss", "boss/1-2boss_file", 14);
+    IMAGE->AddImage("bos2", "boss2/stop");
+    IMAGE->AddImage("boss2r", "boss2/boss2l", 10);
+    IMAGE->AddImage("boss2l", "boss2/boss2r", 10);
     IMAGE->AddImage("bullet", "bullet/bullet", 8);
     IMAGE->AddImage("mob1", "mob1/mob1", 5);
     IMAGE->AddImage("mob2", "mob2/mob2", 9);

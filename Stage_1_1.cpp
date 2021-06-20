@@ -17,7 +17,7 @@ void Stage_1_1::Init()
 	boss = new boss_1(bullet->m_bullets);
 	tile = new TileMap(bullet->m_bullets);
 	tile->Init(stage);
-	coll = new cCollison(bullet->m_bullets, tile);
+	coll = new cCollison(bullet->m_bullets, mob, tile, 200);
 	mob.push_back(new mob_1(bullet->m_bullets, { 400, 300 }));
 	mob.push_back(new mob_1(bullet->m_bullets, { 1700, 200 }));
 	mob.push_back(new mob_1(bullet->m_bullets, { 500, 700 }));
@@ -68,7 +68,7 @@ void Stage_1_1::M_Destroy() //몬스터 파괴 및 조건
 		auto& iter = mob[i];
 		if (tile->cell[int(iter->mob_p.x)][int(iter->mob_p.y)] == 3)
 		{
-			SAFE_DELETE(iter);
+			//SAFE_DELETE(iter);
 			mob.erase(mob.begin() + i);
 			i--; size--;
 		}

@@ -1,6 +1,7 @@
 #pragma once
 #include "Enemy.h"
-class mob_1 : public Enemy
+class mob_1 
+	: public Enemy
 {
 public:
 	vector<cTexture*> m_ani = IMAGE->MakeVecImg("mob1");
@@ -9,6 +10,7 @@ public:
 	float frame = 1;
 	float bultime = 0;
 	float b_count = 4;
+	float size = 40;
 
 	mob_1(vector<cBullet*>& bullet, Vec2 mob_p);
 	virtual ~mob_1();

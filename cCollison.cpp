@@ -1,8 +1,8 @@
 #include "DXUT.h"
 #include "cCollison.h"
 
-cCollison::cCollison(vector<cBullet*>& bullet, TileMap* player)
-	:m_bullet(bullet), m_player(player)
+cCollison::cCollison(vector<cBullet*>& bullet, vector<mob_1*>& mob, TileMap* player, int centerboss)
+	:m_bullet(bullet), m_mob(mob), m_player(player), centerboss(centerboss)
 {
 }
 
@@ -14,11 +14,24 @@ void cCollison::Update()
 {
 	MPColl();
 	MBPColl();
+	if (centerboss != 0) BMPColl();
 }
 
 void cCollison::MPColl()
 {
-
+	for (auto iter = m_mob.begin(); iter != m_mob.end();)
+	{
+		if (7 + (*iter)->size >= D3DXVec2Length(&(m_player->pos - (*iter)->mob_p)) && m_player->cell[m_player->cc.x][m_player->cc.y] == 1)
+		{
+			m_player->stop_pos = m_player->pos;
+			m_player->hp -= 1;
+			m_player->damage = true;
+			m_player->pos = m_player->first;
+			m_player->IsDrawing = true;
+			m_player->DrawArea(3);
+		}
+		iter++;
+	}
 }
 
 void cCollison::MBPColl()
@@ -40,5 +53,18 @@ void cCollison::MBPColl()
 			}
 		}
 		iter++;
+	}
+}
+
+void cCollison::BMPColl()
+{
+	if (7 + centerboss >= D3DXVec2Length(&(m_player->pos - CENTER)) && m_player->cell[m_player->cc.x][m_player->cc.y] == 1)
+	{
+		m_player->stop_pos = m_player->pos;
+		m_player->hp -= 1;
+		m_player->damage = true;
+		m_player->pos = m_player->first;
+		m_player->IsDrawing = true;
+		m_player->DrawArea(3);
 	}
 }
