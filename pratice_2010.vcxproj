@@ -414,6 +414,7 @@
     <ClCompile Include="singleton.cpp" />
     <ClCompile Include="Stage_1_0.cpp" />
     <ClCompile Include="Stage_1_1.cpp" />
+    <ClCompile Include="Stage_2_0.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClInclude Include="boss_1.h" />
@@ -444,6 +445,7 @@
     <ClInclude Include="singleton.h" />
     <ClInclude Include="Stage_1_0.h" />
     <ClInclude Include="Stage_1_1.h" />
+    <ClInclude Include="Stage_2_0.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="TitleScene.h" />

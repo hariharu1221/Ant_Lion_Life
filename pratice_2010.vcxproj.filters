@@ -218,6 +218,9 @@
     <ClCompile Include="Stage_1_0.cpp">
       <Filter>01: Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Stage_2_0.cpp">
+      <Filter>01: Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -321,6 +324,9 @@
       <Filter>03: Manager</Filter>
     </ClInclude>
     <ClInclude Include="Stage_1_0.h">
+      <Filter>01: Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_2_0.h">
       <Filter>01: Scene</Filter>
     </ClInclude>
   </ItemGroup>

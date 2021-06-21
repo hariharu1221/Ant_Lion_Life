@@ -30,7 +30,7 @@ void TitleScene::Update()
 		{
 		case 1:
 			if (INPUT->KeyDown(VK_RETURN))
-				SCENE->ChangeScene("Stage_1_0");
+				SCENE->ChangeScene("Stage_1_1");
 			break;
 		case 2:
 			if (INPUT->KeyDown(VK_RETURN))
