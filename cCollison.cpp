@@ -10,11 +10,12 @@ cCollison::~cCollison()
 {
 }
 
-void cCollison::Update()
+void cCollison::Update(int bosspatern)
 {
 	MPColl();
 	MBPColl();
 	if (centerboss != 0) BMPColl();
+	BPTColl(bosspatern);
 }
 
 void cCollison::MPColl()
@@ -66,5 +67,39 @@ void cCollison::BMPColl()
 		m_player->pos = m_player->first;
 		m_player->IsDrawing = true;
 		m_player->DrawArea(3);
+	}
+}
+
+void cCollison::BPTColl(int bosspatern)
+{
+	if (bosspatern == 0)
+	{
+		colsize = 1;
+	}
+	if (bosspatern == 1)
+	{
+		colsize += Delta * 20;
+		if (7 + colsize >= D3DXVec2Length(&(m_player->pos - Vec2(855, 610))) && m_player->cell[m_player->cc.x][m_player->cc.y] == 1)
+		{
+			m_player->stop_pos = m_player->pos;
+			m_player->hp -= 1;
+			m_player->damage = true;
+			m_player->pos = m_player->first;
+			m_player->IsDrawing = true;
+			m_player->DrawArea(3);
+		}
+	}
+	if (bosspatern == 2)
+	{
+		colsize += Delta * 250;
+		if (7 + colsize >= D3DXVec2Length(&(m_player->pos - Vec2(1085, 610))) && m_player->cell[m_player->cc.x][m_player->cc.y] == 1)
+		{
+			m_player->stop_pos = m_player->pos;
+			m_player->hp -= 1;
+			m_player->damage = true;
+			m_player->pos = m_player->first;
+			m_player->IsDrawing = true;
+			m_player->DrawArea(3);
+		}
 	}
 }

@@ -18,6 +18,7 @@ public:
 	bool IsDrawing;
 	bool nodamage = false;
 	bool damage = false;
+	bool hpal = false;
 
 	float timer = 300;
 	int coloring_cells = 0;
@@ -28,7 +29,8 @@ public:
 	float skilltime = 0;
 	float b_count = 4;
 	float b_time = 0;
-
+	
+	float y = 0;
 	int nowstage;
 
 	POINT cc;
@@ -62,6 +64,7 @@ public:
 	void Update();
 	void Render();
 	void UIRender();
+	void SUI();
 
 	void Move();
 	void Skill();

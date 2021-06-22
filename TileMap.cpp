@@ -28,8 +28,8 @@ void TileMap::Init(int stage)
 		stage_c = IMAGE->FindImage("stage_c");
 		break;
 	case 2:
-		stage_f = IMAGE->FindImage("stage_f");
-		stage_c = IMAGE->FindImage("stage_c");
+		stage_f = IMAGE->FindImage("2-1stage_f");
+		stage_c = IMAGE->FindImage("2-1stage_c");
 		break;
 	}
 	SetUp();
@@ -352,8 +352,29 @@ void TileMap::UIRender()
 	UI->CenterRender(stage_c, CENTER, 1.2);
 	UI->CenterRender(stage_f, CENTER, 1);
 	if (damage)	UI->CenRender(ani_bullet[int(b_count)], stop_pos);
-	RECT hpb = { 0,0,100 + hp * 80,50 };
-	UI->CropRender(IMAGE->FindImage("hp_bg"), Vec2(243, 825.5), hpb);
+}
+
+void TileMap::SUI()
+{
+	RECT tmp = { 0,0,1920 * (timer / 300),100 };
+	if (pos.y <= 240)	{ y -= Delta * 70; if (y < -100) y = -100; }
+	else				{ y += Delta * 70; if (y > 0) y = 0; }
+	if (pos.y <= 60)
+	{
+		UI->CenterRender2(IMAGE->FindImage("ui_bg"), Vec2(0, y), 1, true);
+		UI->CropRender2(IMAGE->FindImage("timebar"), Vec2(0, y / 3), tmp, true);
+	}
+	else
+	{
+		UI->CenterRender2(IMAGE->FindImage("ui_bg"), Vec2(0, y), 1);
+		UI->CropRender2(IMAGE->FindImage("timebar"), Vec2(0, y / 3), tmp);
+	}
+
+
+
+	RECT hpb = { 0,0,hp * 150,1080 };
+	if (pos.x <= 770 && pos.y >= 930 && pos.y <= 1000)	UI->CropRender2(IMAGE->FindImage("hp"), Vec2(0, 0), hpb, 1, true);
+	else	UI->CropRender2(IMAGE->FindImage("hp"), Vec2(0, 0), hpb, 1, false);
 
 
 	char str[256];
@@ -434,6 +455,11 @@ void TileMap::ChangeScene()
 			SCENE->ChangeScene("Stage_1_1");
 			break;
 		case 1:
+			IMAGE->ReloadImage("stage_c");
+			IMAGE->ReloadImage("stage_f");
+			SCENE->ChangeScene("Stage_2_0");
+			break;
+		case 2:
 			IMAGE->ReloadImage("stage_c");
 			IMAGE->ReloadImage("stage_f");
 			SCENE->ChangeScene("TitleScene");

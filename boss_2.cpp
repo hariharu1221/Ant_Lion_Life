@@ -30,14 +30,14 @@ void boss_2::UIRender()
 	if (sk == 1)
 	{
 		m_ani = IMAGE->MakeVecImg("boss2l");
-		frame += Delta * 4;
+		frame += Delta * 7;
 		if (frame >= m_ani.size()) { frame = 0; sk = 0; }
 		UI->CenterRender(m_ani[int(frame)], CENTER, 3);
 	}
 	else if (sk == 2)
 	{
 		m_ani = IMAGE->MakeVecImg("boss2r");
-		frame += Delta * 4;
+		frame += Delta * 7;
 		if (frame >= m_ani.size()) { frame = 0; sk = 0; }
 		UI->CenterRender(m_ani[int(frame)], CENTER, 3);
 	}

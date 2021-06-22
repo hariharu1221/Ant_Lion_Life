@@ -14,11 +14,13 @@ public:
 
 	bool b_PMcoll = true;
 	int centerboss;
+	int colsize;
 
-	void Update();
+	void Update(int bosspatern = 0);
 
 	void MPColl();
 	void MBPColl();
 	void BMPColl();
+	void BPTColl(int bosspatern);
 };
 

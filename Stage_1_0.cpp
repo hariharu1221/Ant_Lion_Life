@@ -31,7 +31,7 @@ void Stage_1_0::Update()
 	for (auto iter = mob.begin(); iter != mob.end(); iter++)	(*iter)->Update(tile->pos, tile->cell);
 	M_Destroy();
 	bullet->Update();
-	coll->Update();
+	coll->Update(boss->sk);
 	tile->Update();
 }
 
@@ -48,6 +48,7 @@ void Stage_1_0::UIRender()
 	boss->UIRender();
 	for (auto iter : mob) iter->UIRender();
 	bullet->Render();
+	tile->SUI();
 }
 
 void Stage_1_0::Release()

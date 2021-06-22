@@ -16,9 +16,9 @@ public:
 
 	void CenterRender(cTexture* ptr, Vec2 pos, float size = 1, float rot = 0);
 	void CenRender(cTexture* ptr, Vec2 pos, float size = 1, float rot = 0);
-	void CenterRender2(cTexture* ptr, Vec2 pos, float size = 1);
+	void CenterRender2(cTexture* ptr, Vec2 pos, float size = 1, bool alpha = false);
 	void CropRender(cTexture* ptr, Vec2 pos, RECT& rc, float size = 1);
-	void CropRender2(cTexture* ptr, Vec2 pos, RECT& rc, float size = 1);
+	void CropRender2(cTexture* ptr, Vec2 pos, RECT& rc, float size = 1, bool alpha = false);
 	void PrintText(string str, Vec2 pos, float size);
 };
 

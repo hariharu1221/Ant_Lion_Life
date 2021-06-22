@@ -4,6 +4,7 @@
 #include "EndScene.h"
 #include "Stage_1_1.h"
 #include "Stage_1_0.h"
+#include "Stage_2_0.h"
 
 cMaingame::cMaingame()
 {
@@ -20,6 +21,7 @@ void cMaingame::Init()
     SCENE->AddScene("EndScene", new EndScene);
     SCENE->AddScene("Stage_1_1", new Stage_1_1);
     SCENE->AddScene("Stage_1_0", new Stage_1_0);
+    SCENE->AddScene("Stage_2_0", new Stage_2_0);
     SCENE->ChangeScene("TitleScene");
     //CAMERA->Init();
 }
@@ -80,6 +82,10 @@ void cMaingame::AddResource()
     IMAGE->AddImage("blue", "blue");
     IMAGE->AddImage("stage_f", "stage_f");
     IMAGE->AddImage("stage_c", "stage_c");
+    IMAGE->AddImage("2-1stage_f", "2-1stage_f");
+    IMAGE->AddImage("2-1stage_c", "2-1stage_c");
+    IMAGE->AddImage("timebar", "timebar");
+    IMAGE->AddImage("ui_bg", "ui_bg");
 
     IMAGE->AddImage("credit ready", "credit ready");
     IMAGE->AddImage("end the game ready", "end the game ready");

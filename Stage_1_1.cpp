@@ -48,6 +48,7 @@ void Stage_1_1::UIRender()
 	boss->UIRender();
 	for (auto iter : mob) iter->UIRender();
 	bullet->Render();
+	tile->SUI();
 }
 
 void Stage_1_1::Release()
