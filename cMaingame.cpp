@@ -82,8 +82,8 @@ void cMaingame::AddResource()
     IMAGE->AddImage("blue", "blue");
     IMAGE->AddImage("stage_f", "stage_f");
     IMAGE->AddImage("stage_c", "stage_c");
-    IMAGE->AddImage("2-1stage_f", "2-1stage_f");
-    IMAGE->AddImage("2-1stage_c", "2-1stage_c");
+    IMAGE->AddImage("2-0stage_f", "2-0stage_f");
+    IMAGE->AddImage("2-0stage_c", "2-0stage_c");
     IMAGE->AddImage("timebar", "timebar");
     IMAGE->AddImage("ui_bg", "ui_bg");
 

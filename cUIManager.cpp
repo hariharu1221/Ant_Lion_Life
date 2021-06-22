@@ -51,13 +51,12 @@ void cUIManager::CenRender(cTexture* ptr, Vec2 pos, float size, float rot)
 	m_sprite->Draw(ptr->ptr, nullptr, &Vec3(ptr->info.Width / 2, ptr->info.Height / 2, 0), nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 }
 
-void cUIManager::CenterRender2(cTexture* ptr, Vec2 pos, float size, bool alpha)
+void cUIManager::CenterRender2(cTexture* ptr, Vec2 pos, float size, int alpha)
 {
 	D3DXMATRIXA16 mat;
 	D3DXMatrixAffineTransformation2D(&mat, size, nullptr, 0, &Vec2(pos.x, pos.y));
 	m_sprite->SetTransform(&mat);
-	if (alpha)	m_sprite->Draw(ptr->ptr, nullptr, nullptr, nullptr, D3DCOLOR_ARGB(100, 255, 255, 255));
-	else m_sprite->Draw(ptr->ptr, nullptr, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+	m_sprite->Draw(ptr->ptr, nullptr, nullptr, nullptr, D3DCOLOR_ARGB(alpha, 255, 255, 255));
 }
 
 void cUIManager::CropRender(cTexture* ptr, Vec2 pos, RECT& rc, float size)
@@ -68,16 +67,12 @@ void cUIManager::CropRender(cTexture* ptr, Vec2 pos, RECT& rc, float size)
 	m_sprite->Draw(ptr->ptr, &rc, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 }
 
-void cUIManager::CropRender2(cTexture* ptr, Vec2 pos, RECT& rc, float size, bool alpha)
+void cUIManager::CropRender2(cTexture* ptr, Vec2 pos, RECT& rc, float size, int alpha)
 {
 	D3DXMATRIXA16 mat;
 	D3DXMatrixAffineTransformation2D(&mat, size, nullptr, 0, &Vec2(pos.x, pos.y));
 	m_sprite->SetTransform(&mat);
-	if (alpha)
-	{
-		m_sprite->Draw(ptr->ptr, &rc, nullptr, nullptr, D3DCOLOR_ARGB(100, 255, 255, 255));
-	}
-	else	m_sprite->Draw(ptr->ptr, &rc, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+	m_sprite->Draw(ptr->ptr, &rc, nullptr, nullptr, D3DCOLOR_ARGB(alpha, 255, 255, 255));
 }
 
 void cUIManager::PrintText(string str, Vec2 pos, float size)
