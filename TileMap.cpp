@@ -33,9 +33,12 @@ void TileMap::Init(int stage)
 		break;
 	}
 	SetUp();
+
 	IsDrawing = true;
 	DrawArea();
 	IsDrawing = false;
+
+	start = true;
 }
 
 void TileMap::Update()
@@ -83,7 +86,7 @@ void TileMap::Move()
 					DrawLine();
 		}
 	}
-	else if (INPUT->KeyPress(VK_DOWN) && pos.y <= (WINSIZEY - 0)) 
+	if (INPUT->KeyPress(VK_DOWN) && pos.y <= (WINSIZEY - 0)) 
 	{ 
 		for (size_t i = 0; i < speed; i++)
 		{
@@ -103,7 +106,7 @@ void TileMap::Move()
 					DrawLine();
 		}
 	}
-	else if (INPUT->KeyPress(VK_LEFT) && pos.x >= 0) 
+	if (INPUT->KeyPress(VK_LEFT) && pos.x >= 0) 
 	{ 
 		for (size_t i = 0; i < speed; i++)
 		{
@@ -123,7 +126,7 @@ void TileMap::Move()
 					DrawLine();
 		}
 	}
-	else if (INPUT->KeyPress(VK_RIGHT) && pos.x <= (WINSIZEX - 0)) 
+	if (INPUT->KeyPress(VK_RIGHT) && pos.x <= (WINSIZEX - 0)) 
 	{ 
 		for (size_t i = 0; i < speed; i++)
 		{
@@ -169,9 +172,13 @@ void TileMap::DrawArea(int draw_flag)
 
 	DrawArea(1);
 
+	if (draw_flag == 2)
+		if (changecount > cellcount) ccs = true;
+
 	D3DLOCKED_RECT lr;
 	stage_f->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
 	DWORD* pixel = (DWORD*)lr.pBits;
+	cellcount = CELLSIZEX * CELLSIZEY;
 
 	for (int y = CELLSIZEY - 1; y != -1; --y)
 	{
@@ -198,8 +205,9 @@ void TileMap::DrawArea(int draw_flag)
 				}
 				Opacity = D3DCOLOR_RGBA(int(SaveImage[x][y].r * 255), int(SaveImage[x][y].g * 255), int(SaveImage[x][y].b * 255), 0);
 
-				second = { float(x),float(y)  };
+				second = { float(x),float(y) };
 				cell[x][y] = 2;
+
 				if (cell[x + 1][y] & cell[x - 1][y] == 3 || cell[x][y + 1] & cell[x][y - 1] == 3)
 					cell[x][y] = 3;
 
@@ -211,6 +219,7 @@ void TileMap::DrawArea(int draw_flag)
 			case 3:
 				if (cell[x][y] == 3)
 					Opacity = SaveImage[x][y];
+				cellcount--;
 			}
 
 			pixel[y * CELLSIZEX + x] = Opacity;
@@ -244,6 +253,7 @@ void TileMap::AutoFill()
 			FloodFill({ second.x + 1, second.y - 1 }, 100, 0);
 		}
 	}
+	DrawArea(2);
 	second = { 0,0 };
 }
 
@@ -267,13 +277,14 @@ bool TileMap::FloodFill(Vec2 pos, int target, int change)
 	if (add)
 		temp++;
 
+
 	while (!v2q.empty())
 	{
 		Vec2 n = v2q.front();
 		v2q.pop();
 
-		//if (n.x == (int)(boss->pos.x - x_gap) &&
-		//	n.y == (int)(boss->pos.y - y_gap))
+		//if (n.x == (int)(CENTER - x_gap) &&
+		//	n.y == (int)(CENTER - y_gap))
 		//	return false;
 		if (cell[(int)n.x - 1][(int)n.y] == target)
 		{
@@ -356,31 +367,44 @@ void TileMap::UIRender()
 
 void TileMap::SUI()
 {
-	RECT tmp = { 0,0,1920 * (timer / 300),100 };
-	if (pos.y <= 160)	{ y -= Delta * 70; if (y < -100) y = -100; }
-	else				{ y += Delta * 70; if (y > 0) y = 0; }
+	RECT tmp = { 0,0,1920 * (timer / 100),100 };
+	if (pos.y <= 160) { y -= Delta * 70; if (y < -100) y = -100; }
+	else { y += Delta * 70; if (y > 0) y = 0; }
 	if (pos.y <= 90)
 	{
-		UI->CenterRender2(IMAGE->FindImage("ui_bg"), Vec2(0, y), 1, 90);
+		UI->CenterRender2(IMAGE->FindImage("ui_bg"), Vec2(0, y / 1.2 - 50), 1, 90);
 		UI->CropRender2(IMAGE->FindImage("timebar"), Vec2(0, y / 3), tmp, 1, 60);
+		Text(100 + y, y);
 	}
 	else
 	{
-		UI->CenterRender2(IMAGE->FindImage("ui_bg"), Vec2(0, y), 1);
+		UI->CenterRender2(IMAGE->FindImage("ui_bg"), Vec2(0, y / 1.2 - 50), 1);
 		UI->CropRender2(IMAGE->FindImage("timebar"), Vec2(0, y / 3), tmp);
+		Text(255, y);
+	}
+
+	RECT hpb = { 0,0,hp * 150,1080 };
+
+	if (start)
+	{
+		b_start += 0.1;
+		if (b_start >= m_start.size()) { start = false; b_start = 0; }
+		UI->CenterRender(m_start[int(b_start)], CENTER, 1.2);
 	}
 
 
-
-	RECT hpb = { 0,0,hp * 150,1080 };
 	if (pos.x <= 770 && pos.y >= 930 && pos.y <= 1000)	UI->CropRender2(IMAGE->FindImage("hp"), Vec2(0, 0), hpb, 1, 100);
 	else	UI->CropRender2(IMAGE->FindImage("hp"), Vec2(0, 0), hpb, 1);
+}
 
-
+void TileMap::Text(int alpha, int y)
+{
 	char str[256];
-	if (coloring_per < 10)  sprintf(str, "%.2f", (double)coloring_per);
-	else					sprintf(str, "%.1f", (double)coloring_per);
-	UI->PrintText(str, Vec2(200, 100), 100);
+	if (coloring_per < 10)  sprintf(str, "%.2f%%", (double)coloring_per);
+	else					sprintf(str, "%.1f%%", (double)coloring_per);
+	UI->PrintText(str, Vec2(150, 80 + (y / 1.2)), 50, alpha, 100, 100, 100);
+	sprintf(str, "stage: %d", nowstage + 1);
+	UI->PrintText(str, Vec2(350, 80 + (y / 1.2)), 50, alpha, 100, 100, 100);
 }
 
 void TileMap::SetUp()
@@ -402,7 +426,7 @@ void TileMap::SetUp()
 
 	hp = 5;
 	speed = 4;
-	timer = 300;
+	timer = 100;
 	second = { 0,0 };
 	frame = 0;
 
@@ -438,6 +462,8 @@ void TileMap::ChangeScene()
 	{
 		IMAGE->ReloadImage("stage_c");
 		IMAGE->ReloadImage("stage_f");
+		IMAGE->ReloadImage("2-0stage_c");
+		IMAGE->ReloadImage("2-0stage_f");
 		stage_f = IMAGE->FindImage("stage_f");
 		stage_c = IMAGE->FindImage("stage_c");
 		SetUp();
@@ -471,3 +497,36 @@ void TileMap::ChangeScene()
 //클리어시 이펙트
 //왼쪽위 버그 수정
 //보스2 스킬 콜라이더
+
+//if (ccs == true) {
+//	for (int y = CELLSIZEY - 1; y != -1; --y)
+//	{
+//		for (int x = CELLSIZEX - 1; x != -1; --x)
+//		{
+//			switch (cell[x][y])
+//			{
+//			case 0:
+//				cell[x][y] = 3;
+//				break;
+//			case 4:
+//				cell[x][y] = 0;
+//				break;
+//			}
+//		}
+//	}
+//	for (int y = CELLSIZEY - 1; y != -1; --y)
+//	{
+//		for (int x = CELLSIZEX - 1; x != -1; --x)
+//		{
+//			D3DXCOLOR Opacity = pixel[y * CELLSIZEX + x];
+//			switch (cell[x][y])
+//			{
+//			case 3:
+//				if (cell[x][y] == 3)
+//					Opacity = SaveImage[x][y];
+//			}
+//			pixel[y * CELLSIZEX + x] = Opacity;
+//		}
+//	}
+//	ccs = false;
+//}

@@ -19,7 +19,7 @@ public:
 	void CenterRender2(cTexture* ptr, Vec2 pos, float size = 1, int alpha = 255);
 	void CropRender(cTexture* ptr, Vec2 pos, RECT& rc, float size = 1);
 	void CropRender2(cTexture* ptr, Vec2 pos, RECT& rc, float size = 1, int alpha = 255);
-	void PrintText(string str, Vec2 pos, float size);
+	void PrintText(string str, Vec2 pos, float size, int alpha = 255, int r = 0, int g = 0, int b = 0);
 };
 
 #define UI cUIManager::GetInstance()

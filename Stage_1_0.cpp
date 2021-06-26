@@ -44,9 +44,9 @@ void Stage_1_0::Render()
 void Stage_1_0::UIRender()
 {
 	tile->UIRender();
-	player->UIRender(tile->pos);
 	boss->UIRender();
 	for (auto iter : mob) iter->UIRender();
+	player->UIRender(tile->pos);
 	bullet->Render();
 	tile->SUI();
 }

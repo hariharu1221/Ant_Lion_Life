@@ -10,12 +10,16 @@ cCollison::~cCollison()
 {
 }
 
-void cCollison::Update(int bosspatern)
+void cCollison::Update(int bosspatern, Vec2 bpos)
 {
-	MPColl();
-	MBPColl();
-	if (centerboss != 0) BMPColl();
-	BPTColl(bosspatern);
+	this->bpos = bpos;
+	if (m_player->damage == false)
+	{
+		MPColl();
+		MBPColl();
+		if (centerboss != 0) BMPColl();
+		BPTColl(bosspatern);
+	}
 }
 
 void cCollison::MPColl()
@@ -59,7 +63,7 @@ void cCollison::MBPColl()
 
 void cCollison::BMPColl()
 {
-	if (7 + centerboss >= D3DXVec2Length(&(m_player->pos - CENTER)) && m_player->cell[m_player->cc.x][m_player->cc.y] == 1)
+	if (7 + centerboss >= D3DXVec2Length(&(m_player->pos - bpos)) && m_player->cell[m_player->cc.x][m_player->cc.y] == 1)
 	{
 		m_player->stop_pos = m_player->pos;
 		m_player->hp -= 1;

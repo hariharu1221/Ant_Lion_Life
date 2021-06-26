@@ -42,9 +42,6 @@
     <Filter Include="03: Manager\UI">
       <UniqueIdentifier>{ada2cafb-19fa-4276-8267-bd4884362136}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02: Object\Player">
-      <UniqueIdentifier>{e617ec6b-796a-43ae-8954-cd41cb46394a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02: Object\Bullet">
       <UniqueIdentifier>{3601eafc-26f5-4883-a5c0-fadb52187d22}</UniqueIdentifier>
     </Filter>
@@ -59,6 +56,9 @@
     </Filter>
     <Filter Include="02: Object\Bullet\MB">
       <UniqueIdentifier>{bec6139f-3abb-41a0-ab6a-04fb2af53baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02: Object\Player">
+      <UniqueIdentifier>{e617ec6b-796a-43ae-8954-cd41cb46394a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -221,6 +221,12 @@
     <ClCompile Include="Stage_2_0.cpp">
       <Filter>01: Scene</Filter>
     </ClCompile>
+    <ClCompile Include="mob_3.cpp">
+      <Filter>02: Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="boss_3.cpp">
+      <Filter>02: Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -328,6 +334,12 @@
     </ClInclude>
     <ClInclude Include="Stage_2_0.h">
       <Filter>01: Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="mob_3.h">
+      <Filter>02: Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="boss_3.h">
+      <Filter>02: Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

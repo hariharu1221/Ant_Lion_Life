@@ -75,12 +75,12 @@ void cUIManager::CropRender2(cTexture* ptr, Vec2 pos, RECT& rc, float size, int 
 	m_sprite->Draw(ptr->ptr, &rc, nullptr, nullptr, D3DCOLOR_ARGB(alpha, 255, 255, 255));
 }
 
-void cUIManager::PrintText(string str, Vec2 pos, float size)
+void cUIManager::PrintText(string str, Vec2 pos, float size, int alpha, int r, int g, int b)
 {
 	D3DXMATRIXA16 mat;
-	D3DXCreateFontA(g_device, size*0.8, 0, 10, 1, 0, DEFAULT_CHARSET, 0, 0, 0, "Kick The Font", &m_font);
+	D3DXCreateFontA(g_device, size*0.8, 0, 10, 1, 0, DEFAULT_CHARSET, 0, 0, 0, "Tmon¸ó¼Ò¸® Black", &m_font);
 	D3DXMatrixTranslation(&mat, pos.x - size * (str.size() * 0.25), pos.y - size / 2, 0);
 	m_sprite->SetTransform(&mat);
-	m_font->DrawTextA(m_sprite, str.c_str(), str.size(), nullptr, DT_NOCLIP, D3DCOLOR_XRGB(0, 0, 0));
+	m_font->DrawTextA(m_sprite, str.c_str(), str.size(), nullptr, DT_NOCLIP, D3DCOLOR_ARGB(alpha, r, g, b));
 	SAFE_RELEASE(m_font);
 }

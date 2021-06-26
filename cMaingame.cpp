@@ -86,6 +86,7 @@ void cMaingame::AddResource()
     IMAGE->AddImage("2-0stage_c", "2-0stage_c");
     IMAGE->AddImage("timebar", "timebar");
     IMAGE->AddImage("ui_bg", "ui_bg");
+    IMAGE->AddImage("start", "start/startgame", 14);
 
     IMAGE->AddImage("credit ready", "credit ready");
     IMAGE->AddImage("end the game ready", "end the game ready");
@@ -100,5 +101,19 @@ void cMaingame::AddResource()
     IMAGE->AddImage("mob1", "mob1/mob1", 5);
     IMAGE->AddImage("mob2", "mob2/mob2", 9);
     IMAGE->AddImage("mob2_skill", "mob2/mob2_skill", 9);
+    IMAGE->AddImage("mob3rl", "mob3r/left/mob3", 3);
+    IMAGE->AddImage("mob3rr", "mob3r/right/mob3", 3);
+    IMAGE->AddImage("mob3rt", "mob3r/up/mob3", 3);
+    IMAGE->AddImage("mob3rb", "mob3r/down/mob3", 3);
+    IMAGE->AddImage("mob3bl", "mob3b/left/mob3", 3);
+    IMAGE->AddImage("mob3br", "mob3b/right/mob3", 3);
+    IMAGE->AddImage("mob3bt", "mob3b/up/mob3", 3);
+    IMAGE->AddImage("mob3bb", "mob3b/down/mob3", 3);
+    IMAGE->AddImage("boss3l", "boss3/left/boss3", 4);
+    IMAGE->AddImage("boss3r", "boss3/right/boss3", 4);
+    IMAGE->AddImage("boss3t", "boss3/up/boss3", 4);
+    IMAGE->AddImage("boss3b", "boss3/down/boss3", 4);
+    IMAGE->AddImage("boss3sk1", "boss3/ready/boss3", 4);
+    IMAGE->AddImage("boss3sk2", "boss3/go/boss3", 2);
 }
 

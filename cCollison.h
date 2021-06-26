@@ -12,11 +12,13 @@ public:
 	vector<mob_1*>& m_mob;
 	TileMap* m_player;
 
+	Vec2 bpos;
+
 	bool b_PMcoll = true;
 	int centerboss;
 	int colsize;
 
-	void Update(int bosspatern = 0);
+	void Update(int bosspatern = 0, Vec2 bpos = CENTER);
 
 	void MPColl();
 	void MBPColl();

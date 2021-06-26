@@ -19,6 +19,8 @@ public:
 	bool nodamage = false;
 	bool damage = false;
 	bool hpal = false;
+	bool start = false;
+	float b_start = 0;
 
 	float timer = 300;
 	int coloring_cells = 0;
@@ -38,6 +40,7 @@ public:
 	cTimer* normal = nullptr;
 
 	vector<cTexture*> m_ani;
+	vector<cTexture*> m_start = IMAGE->MakeVecImg("start");
 	vector<cBullet*>& m_bullet;
 	vector<cTexture*> ani_bullet = IMAGE->MakeVecImg("bullet");
 	cTexture* stage_f;
@@ -47,6 +50,9 @@ public:
 	static D3DXCOLOR Savebg[CELLSIZEX][CELLSIZEY];
 
 	float coloring_per = 0;
+	int cellcount = CELLSIZEX * CELLSIZEY;
+	int changecount = 0;
+	bool ccs = false;
 
 	enum class KeyState
 	{
@@ -65,6 +71,8 @@ public:
 	void Render();
 	void UIRender();
 	void SUI();
+	void Text(int alpha, int y);
+
 
 	void Move();
 	void Skill();
