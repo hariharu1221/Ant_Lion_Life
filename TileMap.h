@@ -20,6 +20,8 @@ public:
 	bool damage = false;
 	bool hpal = false;
 	bool start = false;
+	bool gc = false;
+	bool gv = false;
 	float b_start = 0;
 
 	float timer = 300;
@@ -31,6 +33,8 @@ public:
 	float skilltime = 0;
 	float b_count = 4;
 	float b_time = 0;
+	float b_gc = 0;
+	float b_gv = 0;
 	
 	float y = 0;
 	int nowstage;
@@ -41,10 +45,12 @@ public:
 
 	vector<cTexture*> m_ani;
 	vector<cTexture*> m_start = IMAGE->MakeVecImg("start");
+	vector<cTexture*> m_gv = IMAGE->MakeVecImg("gve");
 	vector<cBullet*>& m_bullet;
 	vector<cTexture*> ani_bullet = IMAGE->MakeVecImg("bullet");
 	cTexture* stage_f;
 	cTexture* stage_c;
+	string stagename;
 
 	static D3DXCOLOR SaveImage[CELLSIZEX][CELLSIZEY];
 	static D3DXCOLOR Savebg[CELLSIZEX][CELLSIZEY];
@@ -63,7 +69,7 @@ public:
 	};
 	KeyState KEY;
 
-	TileMap(vector<cBullet*>& m_bullet);
+	TileMap(vector<cBullet*>& m_bullet, const string stagename);
 	~TileMap();
 
 	void Init(int stage);

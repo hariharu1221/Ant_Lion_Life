@@ -13,6 +13,12 @@ public:
 	TileMap* m_player;
 
 	Vec2 bpos;
+	LPD3DXLINE line;
+
+	RECT MP;
+	RECT MBP;
+	RECT BMP;
+	RECT BPT;
 
 	bool b_PMcoll = true;
 	int centerboss;
@@ -24,5 +30,7 @@ public:
 	void MBPColl();
 	void BMPColl();
 	void BPTColl(int bosspatern);
+	void Rtdraw(RECT rt);
+	void Render();
 };
 

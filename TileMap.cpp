@@ -2,8 +2,8 @@
 #include "TileMap.h"
 #include "cMBullet.h"
 
-TileMap::TileMap(vector<cBullet*>& bullet)
-	:m_bullet(bullet)
+TileMap::TileMap(vector<cBullet*>& bullet, const string stagename)
+	:m_bullet(bullet), stagename(stagename)
 {
 }
 
@@ -45,7 +45,7 @@ void TileMap::Update()
 {
 	ChangeScene();
 	Skill();
-	Move();
+	if(gc == false && gv == false)	Move();
 	cc = { int(pos.x - x_gap), int(pos.y - y_gap) };
 }
 
@@ -356,6 +356,51 @@ int TileMap::Current()
 
 void TileMap::Render()
 {
+	if (hp <= 0 || timer <= 0) //Á×À¸¸é
+	{
+		b_gv += Delta * 5;
+		if (b_gv >= m_gv.size()) b_gv = m_gv.size() - 1;
+		gv = true;
+		if (INPUT->PointDown(VK_LBUTTON, { 0,0,100,100 }))
+		{
+			IMAGE->ReloadImage("stage_c");
+			IMAGE->ReloadImage("stage_f");
+			IMAGE->ReloadImage("2-0stage_c");
+			IMAGE->ReloadImage("2-0stage_f");
+			stage_f = IMAGE->FindImage("stage_f");
+			stage_c = IMAGE->FindImage("stage_c");
+			SetUp();
+			DrawArea();
+			SCENE->ChangeScene("TitleScene");
+		}
+		if (INPUT->PointDown(VK_LBUTTON, { 0,0,300,300 }))
+		{
+			IMAGE->ReloadImage("stage_c");
+			IMAGE->ReloadImage("stage_f");
+			IMAGE->ReloadImage("2-0stage_c");
+			IMAGE->ReloadImage("2-0stage_f");
+			stage_f = IMAGE->FindImage("stage_f");
+			stage_c = IMAGE->FindImage("stage_c");
+			SetUp();
+			DrawArea();
+			switch (nowstage)
+			{
+			case 0:
+				SCENE->ReloadScnee(stagename, new Stage_1_0);
+				break;
+			case 1:
+				SCENE->ReloadScnee(stagename, new Stage_1_1);
+				break;
+			case 2:
+				SCENE->ReloadScnee(stagename, new Stage_2_0);
+				break;
+			case 3:
+				SCENE->ReloadScnee(stagename, new Stage_1_0);
+				break;
+			}
+
+		}
+	}
 }
 
 void TileMap::UIRender()
@@ -395,6 +440,12 @@ void TileMap::SUI()
 
 	if (pos.x <= 770 && pos.y >= 930 && pos.y <= 1000)	UI->CropRender2(IMAGE->FindImage("hp"), Vec2(0, 0), hpb, 1, 100);
 	else	UI->CropRender2(IMAGE->FindImage("hp"), Vec2(0, 0), hpb, 1);
+
+	if (gv)
+	{
+		UI->CenterRender(IMAGE->FindImage("AB"), CENTER);
+		UI->CenterRender(m_gv[int(b_gv)], CENTER);
+	}
 }
 
 void TileMap::Text(int alpha, int y)
@@ -458,18 +509,6 @@ void TileMap::SetUp()
 
 void TileMap::ChangeScene()
 {
-	if (hp <= 0 || timer <= 0) //Á×À¸¸é
-	{
-		IMAGE->ReloadImage("stage_c");
-		IMAGE->ReloadImage("stage_f");
-		IMAGE->ReloadImage("2-0stage_c");
-		IMAGE->ReloadImage("2-0stage_f");
-		stage_f = IMAGE->FindImage("stage_f");
-		stage_c = IMAGE->FindImage("stage_c");
-		SetUp();
-		DrawArea();
-		SCENE->ChangeScene("TitleScene");
-	}
 
 	if (coloring_per >= 80)
 	{

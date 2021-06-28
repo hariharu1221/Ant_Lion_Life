@@ -19,6 +19,7 @@ void cMaingame::Init()
     AddResource();
     SCENE->AddScene("TitleScene", new TitleScene);
     SCENE->AddScene("EndScene", new EndScene);
+    SCENE->AddScene("nullScene", new nullScene);
     SCENE->AddScene("Stage_1_1", new Stage_1_1);
     SCENE->AddScene("Stage_1_0", new Stage_1_0);
     SCENE->AddScene("Stage_2_0", new Stage_2_0);
@@ -86,6 +87,7 @@ void cMaingame::AddResource()
     IMAGE->AddImage("2-0stage_c", "2-0stage_c");
     IMAGE->AddImage("timebar", "timebar");
     IMAGE->AddImage("ui_bg", "ui_bg");
+    IMAGE->AddImage("AB", "AlphaBlack");
     IMAGE->AddImage("start", "start/startgame", 14);
 
     IMAGE->AddImage("credit ready", "credit ready");
@@ -115,5 +117,6 @@ void cMaingame::AddResource()
     IMAGE->AddImage("boss3b", "boss3/down/boss3", 4);
     IMAGE->AddImage("boss3sk1", "boss3/ready/boss3", 4);
     IMAGE->AddImage("boss3sk2", "boss3/go/boss3", 2);
+    IMAGE->AddImage("gve", "gv/gve/gve", 7);
 }
 

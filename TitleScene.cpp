@@ -19,9 +19,9 @@ void TitleScene::Update()
 {
 	if (set)
 	{
-		SCENE->ReloadScnee("Stage_1_0", new Stage_1_0);
-		SCENE->ReloadScnee("Stage_1_1", new Stage_1_1);
-		SCENE->ReloadScnee("Stage_2_0", new Stage_2_0);
+		SCENE->ResetScnee("Stage_1_0", new Stage_1_0);
+		SCENE->ResetScnee("Stage_1_1", new Stage_1_1);
+		SCENE->ResetScnee("Stage_2_0", new Stage_2_0);
 	}
 	if (option == false)
 	{

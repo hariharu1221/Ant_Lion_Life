@@ -15,6 +15,7 @@ public:
 	float m_MaxHp;
 	int m_Score;
 	Vec2 v_pos;
+	string stagename;
 
 	bool tile = false;
 
@@ -25,6 +26,7 @@ public:
 
 	void AddScene(string key, cScene* scene);
 	void ChangeScene(string key);
+	void ResetScnee(string key, cScene* scene);
 	void ReloadScnee(string key, cScene* scene);
 
 	void PlayerInit();

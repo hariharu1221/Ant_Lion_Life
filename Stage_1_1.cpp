@@ -15,7 +15,7 @@ void Stage_1_1::Init()
 	bullet = new cBulletAdmin();
 	player = new cPlayer(bullet->m_bullets);
 	boss = new boss_1(bullet->m_bullets);
-	tile = new TileMap(bullet->m_bullets);
+	tile = new TileMap(bullet->m_bullets, "Stage_1_1");
 	tile->Init(stage);
 	mob.push_back(new mob_1(bullet->m_bullets, { 400, 300 }));
 	mob.push_back(new mob_1(bullet->m_bullets, { 1700, 200 }));

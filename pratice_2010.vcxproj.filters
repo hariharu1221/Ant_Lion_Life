@@ -227,6 +227,9 @@
     <ClCompile Include="boss_3.cpp">
       <Filter>02: Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="nullScene.cpp">
+      <Filter>01: Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -340,6 +343,9 @@
     </ClInclude>
     <ClInclude Include="boss_3.h">
       <Filter>02: Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="nullScene.h">
+      <Filter>01: Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
