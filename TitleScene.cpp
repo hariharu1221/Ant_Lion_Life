@@ -22,11 +22,14 @@ void TitleScene::Update()
 		SCENE->ResetScnee("Stage_1_0", new Stage_1_0);
 		SCENE->ResetScnee("Stage_1_1", new Stage_1_1);
 		SCENE->ResetScnee("Stage_2_0", new Stage_2_0);
+		SCENE->ResetScnee("Stage_3_0", new Stage_3_0);
 	}
 	if (option == false)
 	{
-		if (INPUT->KeyDown(VK_UP) && select > 1) { select--; }
-		if (INPUT->KeyDown(VK_DOWN) && select < 4) { select++; }
+		if (INPUT->KeyDown(VK_UP) && select >= 3) { select -= 2; }
+		if (INPUT->KeyDown(VK_DOWN) && select <= 2) { select += 2; }
+		if (INPUT->KeyDown(VK_RIGHT) && select < 4) { select++; }
+		if (INPUT->KeyDown(VK_LEFT) && select > 1) { select--; }
 		switch (select)
 		{
 		case 1:
@@ -56,8 +59,6 @@ void TitleScene::Update()
 
 void TitleScene::Render()
 {
-	RENDER->CenterRender(IMAGE->FindImage("Title_bg"), Vec2(WINSIZEX / 2, WINSIZEY / 2), 1.5);
-
 	if (select == 1)
 		RENDER->CenterRender(IMAGE->FindImage("start game ready"), CENTER, 1.2);
 	if (select == 2)

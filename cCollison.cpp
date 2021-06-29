@@ -41,6 +41,7 @@ void cCollison::MPColl()
 			m_player->pos = m_player->first;
 			m_player->IsDrawing = true;
 			m_player->DrawArea(3);
+			break;
 		}
 		iter++;
 	}
@@ -54,11 +55,8 @@ void cCollison::MBPColl()
 		{
 			if (7 + (*iter)->size >= D3DXVec2Length(&(m_player->pos - (*iter)->m_pos)) && m_player->cell[m_player->cc.x][m_player->cc.y] == 1)
 			{
-				MBP = { long((*iter)->m_pos.x - (*iter)->m_pos.x), long((*iter)->m_pos.y - (*iter)->m_pos.y),
-				long((*iter)->m_pos.x + (*iter)->m_pos.x), long((*iter)->m_pos.y + (*iter)->m_pos.y) };
-				Rtdraw(MBP);
 				m_player->stop_pos = m_player->pos;
-				m_player->hp -= (*iter)->m_Damage;
+				m_player->hp -= 1;
 				m_player->damage = true;
 				m_player->pos = m_player->first;
 				m_player->IsDrawing = true;

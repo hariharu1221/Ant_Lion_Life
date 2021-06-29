@@ -111,11 +111,6 @@ void boss_3::Skill(Vec2 m_pos)
 
 void boss_3::Render()
 {
-	
-}
-
-void boss_3::UIRender()
-{
 	if (b_skill > 5.2) {
 		if (ready)
 		{
@@ -124,11 +119,15 @@ void boss_3::UIRender()
 			ready = false;
 		}
 		if (frame >= m_ani.size()) { frame = 0; m_ani = IMAGE->MakeVecImg("boss3sk2"); }
-		UI->CenterRender(m_ani[int(frame)], bpos, 3);
+		RENDER->CenterRender(m_ani[int(frame)], bpos, 3);
 	}
 	else
 	{
 		if (frame >= m_ani.size()) { frame = 0; }
-		UI->CenterRender(m_ani[int(frame)], bpos, 3);
-	}
+		RENDER->CenterRender(m_ani[int(frame)], bpos, 3);
+	}	
+}
+
+void boss_3::UIRender()
+{
 }

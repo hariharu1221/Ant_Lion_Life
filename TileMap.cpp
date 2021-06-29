@@ -31,6 +31,10 @@ void TileMap::Init(int stage)
 		stage_f = IMAGE->FindImage("2-0stage_f");
 		stage_c = IMAGE->FindImage("2-0stage_c");
 		break;
+	case 3:
+		stage_f = IMAGE->FindImage("3-0stage_f");
+		stage_c = IMAGE->FindImage("3-0stage_c");
+		break;
 	}
 	SetUp();
 
@@ -283,9 +287,9 @@ bool TileMap::FloodFill(Vec2 pos, int target, int change)
 		Vec2 n = v2q.front();
 		v2q.pop();
 
-		//if (n.x == (int)(CENTER - x_gap) &&
-		//	n.y == (int)(CENTER - y_gap))
-		//	return false;
+		if (n.x == (int)(CENTER.x - x_gap) &&
+			n.y == (int)(CENTER.y - y_gap) && drawbug == false)
+			return false;
 		if (cell[(int)n.x - 1][(int)n.y] == target)
 		{
 			cell[(int)n.x - 1][(int)n.y] = change;
@@ -356,12 +360,14 @@ int TileMap::Current()
 
 void TileMap::Render()
 {
+	RENDER->CenterRender(stage_c, CENTER, 1);
+	RENDER->CenterRender(stage_f, CENTER, 1);
 	if (hp <= 0 || timer <= 0) //죽으면
 	{
 		b_gv += Delta * 5;
 		if (b_gv >= m_gv.size()) b_gv = m_gv.size() - 1;
 		gv = true;
-		if (INPUT->PointDown(VK_LBUTTON, { 0,0,100,100 }))
+		if (INPUT->PointDown(VK_LBUTTON, { 200,500,400,600 }))
 		{
 			IMAGE->ReloadImage("stage_c");
 			IMAGE->ReloadImage("stage_f");
@@ -373,41 +379,18 @@ void TileMap::Render()
 			DrawArea();
 			SCENE->ChangeScene("TitleScene");
 		}
-		if (INPUT->PointDown(VK_LBUTTON, { 0,0,300,300 }))
+		if (INPUT->PointDown(VK_LBUTTON, { 1500,500,1700,600 }))
 		{
-			IMAGE->ReloadImage("stage_c");
-			IMAGE->ReloadImage("stage_f");
-			IMAGE->ReloadImage("2-0stage_c");
-			IMAGE->ReloadImage("2-0stage_f");
-			stage_f = IMAGE->FindImage("stage_f");
-			stage_c = IMAGE->FindImage("stage_c");
-			SetUp();
-			DrawArea();
-			switch (nowstage)
-			{
-			case 0:
-				SCENE->ReloadScnee(stagename, new Stage_1_0);
-				break;
-			case 1:
-				SCENE->ReloadScnee(stagename, new Stage_1_1);
-				break;
-			case 2:
-				SCENE->ReloadScnee(stagename, new Stage_2_0);
-				break;
-			case 3:
-				SCENE->ReloadScnee(stagename, new Stage_1_0);
-				break;
-			}
-
+			retry = true;
 		}
 	}
+	if (damage)	RENDER->CenterRender(ani_bullet[int(b_count)], stop_pos);
 }
 
 void TileMap::UIRender()
 {
-	UI->CenterRender(stage_c, CENTER, 1.2);
-	UI->CenterRender(stage_f, CENTER, 1);
-	if (damage)	UI->CenRender(ani_bullet[int(b_count)], stop_pos);
+	//UI->CenterRender(stage_c, CENTER, 1);
+	//UI->CenterRender(stage_f, CENTER, 1);
 }
 
 void TileMap::SUI()
@@ -527,45 +510,45 @@ void TileMap::ChangeScene()
 		case 2:
 			IMAGE->ReloadImage("2-0stage_c");
 			IMAGE->ReloadImage("2-0stage_f");
+			SCENE->ChangeScene("Stage_3_0");
+			break;
+		case 3:
+			IMAGE->ReloadImage("3-0stage_c");
+			IMAGE->ReloadImage("3-0stage_f");
 			SCENE->ChangeScene("TitleScene");
 			break;
 		}
 	}
+	if (retry)
+	{
+		IMAGE->ReloadImage("stage_c");
+		IMAGE->ReloadImage("stage_f");
+		IMAGE->ReloadImage("2-0stage_c");
+		IMAGE->ReloadImage("2-0stage_f");
+		IMAGE->ReloadImage("3-0stage_c");
+		IMAGE->ReloadImage("3-0stage_f");
+		stage_f = IMAGE->FindImage("stage_f");
+		stage_c = IMAGE->FindImage("stage_c");
+		SetUp();
+		DrawArea();
+		switch (nowstage)
+		{
+		case 0:
+			SCENE->ReloadScnee(stagename, new Stage_1_0);
+			break;
+		case 1:
+			SCENE->ReloadScnee(stagename, new Stage_1_1);
+			break;
+		case 2:
+			SCENE->ReloadScnee(stagename, new Stage_2_0);
+			break;
+		case 3:
+			SCENE->ReloadScnee(stagename, new Stage_3_0);
+			break;
+		}
+		retry = false;
+	}
 }
 
 //클리어시 이펙트
-//왼쪽위 버그 수정
-//보스2 스킬 콜라이더
-
-//if (ccs == true) {
-//	for (int y = CELLSIZEY - 1; y != -1; --y)
-//	{
-//		for (int x = CELLSIZEX - 1; x != -1; --x)
-//		{
-//			switch (cell[x][y])
-//			{
-//			case 0:
-//				cell[x][y] = 3;
-//				break;
-//			case 4:
-//				cell[x][y] = 0;
-//				break;
-//			}
-//		}
-//	}
-//	for (int y = CELLSIZEY - 1; y != -1; --y)
-//	{
-//		for (int x = CELLSIZEX - 1; x != -1; --x)
-//		{
-//			D3DXCOLOR Opacity = pixel[y * CELLSIZEX + x];
-//			switch (cell[x][y])
-//			{
-//			case 3:
-//				if (cell[x][y] == 3)
-//					Opacity = SaveImage[x][y];
-//			}
-//			pixel[y * CELLSIZEX + x] = Opacity;
-//		}
-//	}
-//	ccs = false;
-//}
+//델타 픽스업데이트

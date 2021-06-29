@@ -36,9 +36,8 @@ void mob_1::Skill(Vec2 m_pos)
 }
 void mob_1::Render()
 {
-
+	RENDER->CenterRender(m_ani[int(frame)], mob_p, 2);
 }
 void mob_1::UIRender()
 {
-	UI->CenterRender(m_ani[int(frame)], mob_p, 2);
 }

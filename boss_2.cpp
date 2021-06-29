@@ -23,23 +23,23 @@ void boss_2::Skill(Vec2 m_pos)
 
 void boss_2::Render()
 {
-}
-
-void boss_2::UIRender()
-{
 	if (sk == 1)
 	{
 		m_ani = IMAGE->MakeVecImg("boss2l");
 		frame += Delta * 7;
 		if (frame >= m_ani.size()) { frame = 0; sk = 0; }
-		UI->CenterRender(m_ani[int(frame)], CENTER, 3);
+		RENDER->CenterRender(m_ani[int(frame)], CENTER, 3);
 	}
 	else if (sk == 2)
 	{
 		m_ani = IMAGE->MakeVecImg("boss2r");
 		frame += Delta * 7;
 		if (frame >= m_ani.size()) { frame = 0; sk = 0; }
-		UI->CenterRender(m_ani[int(frame)], CENTER, 3);
+		RENDER->CenterRender(m_ani[int(frame)], CENTER, 3);
 	}
-	else UI->CenterRender(IMAGE->FindImage("bos2"), CENTER, 3);
+	else RENDER->CenterRender(IMAGE->FindImage("bos2"), CENTER, 3);
+}
+
+void boss_2::UIRender()
+{
 }

@@ -18,5 +18,5 @@ void cPBullet::Update()
 
 void cPBullet::Render()
 {
-	UI->CenterRender(IMAGE->FindImage("PBullet"), m_pos);
+	RENDER->CenterRender(IMAGE->FindImage("PBullet"), m_pos);
 }

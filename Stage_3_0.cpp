@@ -1,21 +1,21 @@
 #include "DXUT.h"
-#include "Stage_2_0.h"
+#include "Stage_3_0.h"
 
-Stage_2_0::Stage_2_0()
+Stage_3_0::Stage_3_0()
 {
 }
 
-Stage_2_0::~Stage_2_0()
+Stage_3_0::~Stage_3_0()
 {
 }
 
-void Stage_2_0::Init()
+void Stage_3_0::Init()
 {
 	srand(time(NULL));
 	bullet = new cBulletAdmin();
 	player = new cPlayer(bullet->m_bullets);
 	boss = new boss_3();
-	tile = new TileMap(bullet->m_bullets, "Stage_2_0");
+	tile = new TileMap(bullet->m_bullets, "Stage_3_0");
 	tile->Init(stage);
 	mob.push_back(new mob_3(bullet->m_bullets, { 400, 300 }));
 	mob.push_back(new mob_3(bullet->m_bullets, { 1700, 200 }));
@@ -24,7 +24,7 @@ void Stage_2_0::Init()
 	coll = new cCollison(bullet->m_bullets, mob, tile, 130);
 }
 
-void Stage_2_0::Update()
+void Stage_3_0::Update()
 {
 	player->Update(tile->pos);
 	boss->Update(tile->pos, tile->cell);
@@ -35,22 +35,22 @@ void Stage_2_0::Update()
 	M_Destroy();
 }
 
-void Stage_2_0::Render()
+void Stage_3_0::Render()
 {
 	tile->Render();
 	for (auto iter : mob) iter->Render();
-	boss->Render();
 	player->Render(tile->pos);
+	boss->Render();
 	bullet->Render();
 }
 
-void Stage_2_0::UIRender()
+void Stage_3_0::UIRender()
 {
 	tile->UIRender();
 	tile->SUI();
 }
 
-void Stage_2_0::Release()
+void Stage_3_0::Release()
 {
 	SAFE_DELETE(player);
 	SAFE_DELETE(bullet);
@@ -60,7 +60,7 @@ void Stage_2_0::Release()
 	for (auto iter : mob)	SAFE_DELETE(iter);
 }
 
-void Stage_2_0::M_Destroy() //몬스터 파괴 및 조건
+void Stage_3_0::M_Destroy() //몬스터 파괴 및 조건
 {
 	size_t size = mob.size();
 	for (size_t i = 0; i < size; i++)

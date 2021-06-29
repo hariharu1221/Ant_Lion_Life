@@ -22,6 +22,7 @@ public:
 	bool start = false;
 	bool gc = false;
 	bool gv = false;
+	bool retry = false;
 	float b_start = 0;
 
 	float timer = 300;

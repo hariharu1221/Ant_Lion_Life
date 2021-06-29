@@ -29,19 +29,13 @@ void cPlayer::Update(Vec2 m_pos)
 	SCENE->v_pos = m_pos;
 }
 
-void cPlayer::Render()
+void cPlayer::Render(Vec2 m_pos)
 {
-
+	RENDER->CenterRender(IMAGE->FindImage("player"), Vec2(m_pos.x, m_pos.y), 2);
 }
 
-void cPlayer::UIRender(Vec2 m_pos)
+void cPlayer::UIRender()
 {
-	UI->CenterRender(IMAGE->FindImage("player"), Vec2(m_pos.x, m_pos.y));
-	for (int i = 0; i < m_Hp; i++)
-	{
-		//UI->CenterRender(IMAGE->FindImage("hp"), Vec2(62.5 + i * 74, 824.5));
-	}
-	UI->CenterRender(IMAGE->FindImage("hp_hl"), Vec2(249.25, 825.5));
 }
 
 void cPlayer::Move()

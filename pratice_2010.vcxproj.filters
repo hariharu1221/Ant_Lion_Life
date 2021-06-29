@@ -230,6 +230,9 @@
     <ClCompile Include="nullScene.cpp">
       <Filter>01: Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Stage_3_0.cpp">
+      <Filter>01: Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -345,6 +348,9 @@
       <Filter>02: Object\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="nullScene.h">
+      <Filter>01: Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_3_0.h">
       <Filter>01: Scene</Filter>
     </ClInclude>
   </ItemGroup>

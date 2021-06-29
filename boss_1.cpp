@@ -46,16 +46,34 @@ void boss_1::Skill(Vec2 m_pos)
 		skilltime = 0;
 	}
 
+	if (busttime > 0.2) //7초마다 360도 불렛
+	{
+		float  angle = 0;
+
+		float  rad = D3DX_PI * 2 / 30;
+		for (float i = acttime; i < 15.5 + acttime; i++, angle = rad * i)
+		{
+			Vec2 Direction = Vec2(bpos.x + (cosf(angle) * 5), bpos.y + (sinf(angle) * 5));
+			Direction = Direction - bpos;
+			D3DXVec2Normalize(&Direction, &Direction);
+			m_bullet.push_back(new cMBullet(bpos, Direction, 7));
+		}
+		busttime = 0;
+		acttime++;
+		if (acttime == 30) { acttime = 0; busttime = -7; }
+	}
+
 	bultime += Delta;
 	skilltime += Delta;
 	b_time += Delta;
+	busttime += Delta;
 }
 
 void boss_1::Render()
 {
+	RENDER->CenterRender(m_ani[int(frame)], CENTER, 2);
 }
 
 void boss_1::UIRender()
 {
-	UI->CenterRender(m_ani[int(frame)], CENTER, 2);
 }

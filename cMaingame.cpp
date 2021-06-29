@@ -23,25 +23,26 @@ void cMaingame::Init()
     SCENE->AddScene("Stage_1_1", new Stage_1_1);
     SCENE->AddScene("Stage_1_0", new Stage_1_0);
     SCENE->AddScene("Stage_2_0", new Stage_2_0);
+    SCENE->AddScene("Stage_3_0", new Stage_3_0);
     SCENE->ChangeScene("TitleScene");
     //CAMERA->Init();
 }
 
 void cMaingame::Update()
 {
-    INPUT->Update();
     SCENE->Update();
+    INPUT->Update();
     PART->Update();
     //CAMERA->Update();
 }
 
 void cMaingame::Render()
 {
+    SCENE->Render();
     PART->Render();
     UI->Begin();
     SCENE->UIRender();
     UI->End();
-    SCENE->Render();
 }
 
 void cMaingame::Release()
@@ -66,25 +67,15 @@ void cMaingame::ResetDevice()
 
 void cMaingame::AddResource()
 {
-	IMAGE->AddImage("main_ui_start", "main_ui_start");
-	IMAGE->AddImage("main_ui_start_d", "main_ui_start_d");
-	IMAGE->AddImage("main_ui_option", "main_ui_option");
-	IMAGE->AddImage("main_ui_option_d", "main_ui_option_d");
-	IMAGE->AddImage("main_ui_exit", "main_ui_exit");
-    IMAGE->AddImage("main_ui_exit_d", "main_ui_exit_d");
-    IMAGE->AddImage("Title_bg", "Title_bg");
     IMAGE->AddImage("hp", "hp");
-    IMAGE->AddImage("hp_bg", "hp_bg");
-    IMAGE->AddImage("hp_hl", "hp_hl");
     IMAGE->AddImage("player", "player");
     IMAGE->AddImage("PBullet", "PBullet");
-    IMAGE->AddImage("line", "line");
-    IMAGE->AddImage("red", "red");
-    IMAGE->AddImage("blue", "blue");
     IMAGE->AddImage("stage_f", "stage_f");
     IMAGE->AddImage("stage_c", "stage_c");
     IMAGE->AddImage("2-0stage_f", "2-0stage_f");
     IMAGE->AddImage("2-0stage_c", "2-0stage_c");
+    IMAGE->AddImage("3-0stage_f", "3-0stage_f");
+    IMAGE->AddImage("3-0stage_c", "3-0stage_c");
     IMAGE->AddImage("timebar", "timebar");
     IMAGE->AddImage("ui_bg", "ui_bg");
     IMAGE->AddImage("AB", "AlphaBlack");

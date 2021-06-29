@@ -18,8 +18,8 @@ public:
 	~cPlayer();
 
 	void Update(Vec2 m_pos);
-	void Render();
-	void UIRender(Vec2 m_pos);
+	void Render(Vec2 m_pos);
+	void UIRender();
 
 	void Move();
 	void FireBullet(Vec2 m_pos);

@@ -14,8 +14,10 @@ public:
 	float frame = 0;
 	float bultime = 0;
 	float skilltime = 0;
+	float busttime = 0;
 	float b_count = 4;
 	float b_time = 0;
+	int acttime = 0;
 
 	boss_1(vector<cBullet*>& bullet);
 	~boss_1();

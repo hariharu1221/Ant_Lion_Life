@@ -17,6 +17,7 @@
 #define WI 400
 #define HE 225
 #define coldraw true
+const bool drawbug = true;
 
 using namespace std;
 
@@ -51,5 +52,6 @@ const int y_gap = (WINSIZEY - CELLSIZEY) / 2;
 #include "Stage_1_0.h"
 #include "Stage_1_1.h"
 #include "Stage_2_0.h"
+#include "Stage_3_0.h"
 #include "TitleScene.h"
 #include "nullScene.h"

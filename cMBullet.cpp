@@ -14,7 +14,7 @@ cMBullet::~cMBullet()
 
 void cMBullet::Update()
 {
-	m_pos += m_Dir * 300 * Delta;
+	m_pos += m_Dir * 300 * Delta * float(m_speed / 500);
 	m_angle = atan2(m_Dir.y, m_Dir.x);
 	timer += Delta;
 	if (timer > 0.2)
@@ -28,5 +28,5 @@ void cMBullet::Update()
 
 void cMBullet::Render()
 {
-	UI->CenterRender(m_ani[count], m_pos, 1, m_angle);
+	RENDER->CenterRender(m_ani[count], m_pos, 1, m_angle);
 }

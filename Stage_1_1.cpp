@@ -38,16 +38,15 @@ void Stage_1_1::Update()
 void Stage_1_1::Render()
 {
 	tile->Render();
-	player->Render();
+	for (auto iter : mob) iter->Render();
+	boss->Render();
+	player->Render(tile->pos);
+	bullet->Render();
 }
 
 void Stage_1_1::UIRender()
 {
 	tile->UIRender();
-	boss->UIRender();
-	for (auto iter : mob) iter->UIRender();
-	player->UIRender(tile->pos);
-	bullet->Render();
 	tile->SUI();
 }
 
