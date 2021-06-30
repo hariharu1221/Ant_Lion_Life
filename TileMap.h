@@ -19,10 +19,15 @@ public:
 	bool nodamage = false;
 	bool damage = false;
 	bool hpal = false;
+
 	bool start = false;
 	bool gc = false;
 	bool gv = false;
+
 	bool retry = false;
+	bool nextstage = false;
+	bool title = false;
+
 	float b_start = 0;
 
 	float timer = 300;
@@ -47,8 +52,9 @@ public:
 	vector<cTexture*> m_ani;
 	vector<cTexture*> m_start = IMAGE->MakeVecImg("start");
 	vector<cTexture*> m_gv = IMAGE->MakeVecImg("gve");
+	vector<cTexture*> m_gc = IMAGE->MakeVecImg("gc");
 	vector<cBullet*>& m_bullet;
-	vector<cTexture*> ani_bullet = IMAGE->MakeVecImg("bullet");
+	vector<cTexture*> ani_bullet = IMAGE->MakeVecImg("damage");
 	cTexture* stage_f;
 	cTexture* stage_c;
 	string stagename;

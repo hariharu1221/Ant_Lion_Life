@@ -396,6 +396,7 @@
     <ClCompile Include="cCollison.cpp" />
     <ClCompile Include="cImageManger.cpp" />
     <ClCompile Include="cInputManager.cpp" />
+    <ClCompile Include="cMABullet.cpp" />
     <ClCompile Include="cMBullet.cpp" />
     <ClCompile Include="cParticle.cpp" />
     <ClCompile Include="cParticleAni.cpp" />
@@ -431,6 +432,7 @@
     <ClInclude Include="cCollison.h" />
     <ClInclude Include="cImageManger.h" />
     <ClInclude Include="cInputManager.h" />
+    <ClInclude Include="cMABullet.h" />
     <ClInclude Include="cMBullet.h" />
     <ClInclude Include="cParticle.h" />
     <ClInclude Include="cParticleAni.h" />

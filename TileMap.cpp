@@ -51,6 +51,8 @@ void TileMap::Update()
 	Skill();
 	if(gc == false && gv == false)	Move();
 	cc = { int(pos.x - x_gap), int(pos.y - y_gap) };
+
+	SCENE->per(coloring_per, pos);
 }
 
 void TileMap::Skill()
@@ -59,11 +61,11 @@ void TileMap::Skill()
 	if (frame == m_ani.size())
 		frame = 0;
 
-	if (b_time > 0.3) { b_count++; b_time = 0; }
-	if (b_count == ani_bullet.size())	{ b_count = 4; damage = false; }
+	if (b_time > 0.15 && damage) { b_count++; b_time = 0; }
+	if (b_count >= ani_bullet.size())	{ b_count = 0; damage = false; }
 
-	timer -= Delta;
-	b_time += Delta;
+	if (gc == false) timer -= Delta;
+	if (damage) b_time += Delta;
 }
 
 void TileMap::Move()
@@ -364,25 +366,19 @@ void TileMap::Render()
 	RENDER->CenterRender(stage_f, CENTER, 1);
 	if (hp <= 0 || timer <= 0) //죽으면
 	{
-		b_gv += Delta * 5;
-		if (b_gv >= m_gv.size()) b_gv = m_gv.size() - 1;
+		b_gv += Delta * 10;
 		gv = true;
-		if (INPUT->PointDown(VK_LBUTTON, { 200,500,400,600 }))
-		{
-			IMAGE->ReloadImage("stage_c");
-			IMAGE->ReloadImage("stage_f");
-			IMAGE->ReloadImage("2-0stage_c");
-			IMAGE->ReloadImage("2-0stage_f");
-			stage_f = IMAGE->FindImage("stage_f");
-			stage_c = IMAGE->FindImage("stage_c");
-			SetUp();
-			DrawArea();
-			SCENE->ChangeScene("TitleScene");
-		}
-		if (INPUT->PointDown(VK_LBUTTON, { 1500,500,1700,600 }))
-		{
-			retry = true;
-		}
+		if (b_gv >= m_gv.size()) b_gv = m_gv.size() - 1;
+		if (INPUT->PointUp(VK_LBUTTON, { 610,660,840,730 }))	retry = true;
+		if (INPUT->PointUp(VK_LBUTTON, { 950,660,1290,730 }))	title = true;
+	}
+	if (coloring_per >= 80)  // 80%채우면
+	{
+		b_gc += Delta * 10;
+		gc = true;
+		if (b_gc >= m_gc.size()) b_gc = m_gc.size() - 1;
+		if (INPUT->PointUp(VK_LBUTTON, { 570,600,920,670 }))	nextstage = true;
+		if (INPUT->PointUp(VK_LBUTTON, { 970,600,1300,670 }))	title = true;
 	}
 	if (damage)	RENDER->CenterRender(ani_bullet[int(b_count)], stop_pos);
 }
@@ -428,6 +424,16 @@ void TileMap::SUI()
 	{
 		UI->CenterRender(IMAGE->FindImage("AB"), CENTER);
 		UI->CenterRender(m_gv[int(b_gv)], CENTER);
+		UI->CenterRender2(IMAGE->FindImage("gvtext"), Vec2(580, 600), 1, 255 * (b_gv / 8));
+	}
+	if (gc)
+	{
+		UI->CenterRender(IMAGE->FindImage("AB"), CENTER);
+		UI->CenterRender(m_gc[int(b_gc)], CENTER);
+		UI->CenterRender2(IMAGE->FindImage("gctext"), Vec2(510, 580), 1, 255 * (b_gc / 15));
+		char str[256];
+		sprintf(str, "%d", int(coloring_per * 100000 * (timer / 3000)));
+		UI->PrintText(str, Vec2(950,553), 80, 255 * (b_gc / 15), 200, 200, 0);
 	}
 }
 
@@ -439,6 +445,8 @@ void TileMap::Text(int alpha, int y)
 	UI->PrintText(str, Vec2(150, 80 + (y / 1.2)), 50, alpha, 100, 100, 100);
 	sprintf(str, "stage: %d", nowstage + 1);
 	UI->PrintText(str, Vec2(350, 80 + (y / 1.2)), 50, alpha, 100, 100, 100);
+	sprintf(str, "score: %d", int(coloring_per * 100000 * (timer / 3000)));
+	UI->PrintText(str, Vec2(1750, 80 + (y / 1.2)), 50, alpha, 100, 100, 100);
 }
 
 void TileMap::SetUp()
@@ -459,7 +467,7 @@ void TileMap::SetUp()
 	temp = 0;
 
 	hp = 5;
-	speed = 4;
+	speed = 8;
 	timer = 100;
 	second = { 0,0 };
 	frame = 0;
@@ -492,8 +500,19 @@ void TileMap::SetUp()
 
 void TileMap::ChangeScene()
 {
-
-	if (coloring_per >= 80)
+	if (title) //타이틀로
+	{
+		IMAGE->ReloadImage("stage_c");
+		IMAGE->ReloadImage("stage_f");
+		IMAGE->ReloadImage("2-0stage_c");
+		IMAGE->ReloadImage("2-0stage_f");
+		stage_f = IMAGE->FindImage("stage_f");
+		stage_c = IMAGE->FindImage("stage_c");
+		SetUp();
+		DrawArea();
+		SCENE->ChangeScene("TitleScene");
+	}
+	if (nextstage) //다음스테이지로
 	{
 		switch (nowstage)
 		{
@@ -519,7 +538,7 @@ void TileMap::ChangeScene()
 			break;
 		}
 	}
-	if (retry)
+	if (retry) //스테이지 리로드
 	{
 		IMAGE->ReloadImage("stage_c");
 		IMAGE->ReloadImage("stage_f");
@@ -534,7 +553,7 @@ void TileMap::ChangeScene()
 		switch (nowstage)
 		{
 		case 0:
-			SCENE->ReloadScnee(stagename, new Stage_1_0);
+			SCENE->ReloadScnee("Stage_1_0", new Stage_1_0);
 			break;
 		case 1:
 			SCENE->ReloadScnee(stagename, new Stage_1_1);
@@ -550,5 +569,4 @@ void TileMap::ChangeScene()
 	}
 }
 
-//클리어시 이펙트
 //델타 픽스업데이트

@@ -1,7 +1,9 @@
 #include "DXUT.h"
 #include "boss_3.h"
+#include "cMBullet.h"
 
-boss_3::boss_3()
+boss_3::boss_3(vector<cBullet*>& bullet)
+	:m_bullet(bullet)
 {
 	m_ani = IMAGE->MakeVecImg("boss3b");
 	speed = 80;
@@ -13,9 +15,15 @@ boss_3::~boss_3()
 
 void boss_3::Update(Vec2 m_pos, int cell[][CELLSIZEY])
 {
-	if (bulskill == false) Move();
-	Skill(m_pos);
+	if (bulskill == false && SCENE->colorper < 80) Move();
+	if (SCENE->colorper < 80) Skill(m_pos);
 	Limit(cell);
+
+	if (SCENE->colorper >= 80)
+	{
+		b_die += Delta * 10;
+		if (b_die >= die.size()) b_die = die.size() - 1;
+	}
 }
 
 void boss_3::Move()
@@ -107,6 +115,25 @@ void boss_3::Skill(Vec2 m_pos)
 	}
 
 	if (b_skill >= 10) { speed = 80; b_skill = 0; bulskill = false; }
+
+	else if (beam > 0.05 && SCENE->colorper > 30)//5초마다 원형 불렛
+	{
+		float  angle = 0;
+
+		float  rad = D3DX_PI * 2 / 20;
+		for (float i = alphaacttime; i < 15.5 + alphaacttime; i += 0.01, angle = rad * i)
+		{
+			Vec2 Direction = Vec2(bpos.x + (cosf(angle) * 5), bpos.y + (sinf(angle) * 5));
+			Direction = Direction - bpos;
+			D3DXVec2Normalize(&Direction, &Direction);
+			m_bullet.push_back(new cMBullet(bpos, Direction, 1, 10, 700, 2));
+		}
+		beam = 0;
+		alphaacttime++;
+		if (alphaacttime == 10) { alphaacttime = 0; beam = -4; }
+	}
+
+	beam += Delta;
 }
 
 void boss_3::Render()
@@ -125,7 +152,11 @@ void boss_3::Render()
 	{
 		if (frame >= m_ani.size()) { frame = 0; }
 		RENDER->CenterRender(m_ani[int(frame)], bpos, 3);
-	}	
+	}
+	if (SCENE->colorper >= 80)
+	{
+		RENDER->CenterRender(die[int(b_die)], bpos, 3);
+	}
 }
 
 void boss_3::UIRender()

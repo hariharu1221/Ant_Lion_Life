@@ -1,6 +1,7 @@
 #include "DXUT.h"
 #include "mob_1.h"
 #include "cMBullet.h"
+#include "cMABullet.h"
 
 mob_1::mob_1(vector<cBullet*>& bullet, Vec2 mob_p)
 	:m_bullet(bullet)
@@ -28,7 +29,7 @@ void mob_1::Skill(Vec2 m_pos)
 	{
 		Vec2 pos;
 		D3DXVec2Normalize(&pos, &(m_pos - mob_p));
-		m_bullet.push_back(new cMBullet(Vec2(mob_p.x + 70, mob_p.y), pos, 1));
+		m_bullet.push_back(new cMABullet(Vec2(mob_p.x + 70, mob_p.y), pos, 1, 10, 700, 1));
 		bultime = 0;
 	}
 

@@ -11,7 +11,13 @@ boss_2::~boss_2()
 
 void boss_2::Update(Vec2 m_pos)
 {
-	Skill(m_pos);
+	if (SCENE->colorper < 80) Skill(m_pos);
+
+	if (SCENE->colorper >= 80)
+	{
+		b_die += Delta * 10;
+		if (b_die >= die.size()) b_die = die.size() - 1;
+	}
 }
 
 void boss_2::Skill(Vec2 m_pos)
@@ -38,6 +44,10 @@ void boss_2::Render()
 		RENDER->CenterRender(m_ani[int(frame)], CENTER, 3);
 	}
 	else RENDER->CenterRender(IMAGE->FindImage("bos2"), CENTER, 3);
+	if (SCENE->colorper >= 80)
+	{
+		RENDER->CenterRender(die[int(b_die)], bpos, 3);
+	}
 }
 
 void boss_2::UIRender()

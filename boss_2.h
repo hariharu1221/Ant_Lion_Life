@@ -5,6 +5,8 @@ public:
 	cTimer* playerAS = nullptr;
 	vector<cTexture*> m_ani;
 	Vec2 bpos = CENTER;
+	vector<cTexture*> die = IMAGE->MakeVecImg("bdie");
+	float b_die = 0;
 
 	float m_Hp;
 	float frame = 0;

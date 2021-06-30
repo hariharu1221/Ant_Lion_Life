@@ -38,8 +38,8 @@ void cMaingame::Update()
 
 void cMaingame::Render()
 {
-    SCENE->Render();
     PART->Render();
+    SCENE->Render();
     UI->Begin();
     SCENE->UIRender();
     UI->End();
@@ -80,6 +80,9 @@ void cMaingame::AddResource()
     IMAGE->AddImage("ui_bg", "ui_bg");
     IMAGE->AddImage("AB", "AlphaBlack");
     IMAGE->AddImage("start", "start/startgame", 14);
+    IMAGE->AddImage("gvtext", "gv/gvb/gve");
+    IMAGE->AddImage("gctext", "gc/gcb");
+    IMAGE->AddImage("credit", "credit");
 
     IMAGE->AddImage("credit ready", "credit ready");
     IMAGE->AddImage("end the game ready", "end the game ready");
@@ -90,7 +93,9 @@ void cMaingame::AddResource()
     IMAGE->AddImage("bos2", "boss2/stop");
     IMAGE->AddImage("boss2r", "boss2/boss2l", 10);
     IMAGE->AddImage("boss2l", "boss2/boss2r", 10);
-    IMAGE->AddImage("bullet", "bullet/bullet", 8);
+    IMAGE->AddImage("bullet", "bullet/bullet", 4);
+    IMAGE->AddImage("bulletblue", "bullet/b_bullet", 8);
+    IMAGE->AddImage("damage", "bullet/damage", 4);
     IMAGE->AddImage("mob1", "mob1/mob1", 5);
     IMAGE->AddImage("mob2", "mob2/mob2", 9);
     IMAGE->AddImage("mob2_skill", "mob2/mob2_skill", 9);
@@ -108,6 +113,12 @@ void cMaingame::AddResource()
     IMAGE->AddImage("boss3b", "boss3/down/boss3", 4);
     IMAGE->AddImage("boss3sk1", "boss3/ready/boss3", 4);
     IMAGE->AddImage("boss3sk2", "boss3/go/boss3", 2);
+    IMAGE->AddImage("bdie", "bdie/die", 15);
     IMAGE->AddImage("gve", "gv/gve/gve", 7);
+    IMAGE->AddImage("gc", "gc/gc", 15);
+    IMAGE->AddImage("mob4l", "mob4/left/mob4", 4);
+    IMAGE->AddImage("mob4r", "mob4/right/mob4", 4);
+    IMAGE->AddImage("mob4t", "mob4/up/mob4", 4);
+    IMAGE->AddImage("mob4b", "mob4/down/mob4", 4);
 }
 

@@ -2,8 +2,12 @@
 class boss_3
 {
 public:
+	vector<cBullet*>& m_bullet;
 	cTimer* playerAS = nullptr;
 	vector<cTexture*> m_ani;
+	vector<cTexture*> die = IMAGE->MakeVecImg("bdie");
+	float b_die = 0;
+
 	Vec2 bpos = CENTER;
 
 	float m_Hp;
@@ -11,6 +15,8 @@ public:
 	float b_skill = 0;
 	float b_count = 4;
 	float b_time = 0;
+	float beam = 0;
+	int alphaacttime = 0;
 
 	bool bulskill = false;
 	bool ready = false;
@@ -22,7 +28,7 @@ public:
 	int dir = 0;
 	int sk = 0;
 
-	boss_3();
+	boss_3(vector<cBullet*>& bullet);
 	~boss_3();
 
 	void Update(Vec2 m_pos, int cell[][CELLSIZEY]);

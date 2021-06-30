@@ -45,8 +45,8 @@ void cCameraManager::Init()
 	vp.MinZ = 0.f;
 	vp.MaxZ = 1.0;
 
-	m_Eye.x = 0.f;
-	m_Eye.y = 0.f;
+	m_Eye.x = 20.f;
+	m_Eye.y = 20.f;
 	m_Eye.z = -30.f;
 
 	m_At.x = 0.f;

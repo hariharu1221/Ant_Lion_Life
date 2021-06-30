@@ -24,6 +24,7 @@ void TitleScene::Update()
 		SCENE->ResetScnee("Stage_2_0", new Stage_2_0);
 		SCENE->ResetScnee("Stage_3_0", new Stage_3_0);
 	}
+
 	if (option == false)
 	{
 		if (INPUT->KeyDown(VK_UP) && select >= 3) { select -= 2; }
@@ -41,15 +42,16 @@ void TitleScene::Update()
 				exit(0);
 			break;
 		case 3:
-			if (INPUT->KeyDown(VK_RETURN))
-				option = true;
 			break;
 		case 4:
+			if (INPUT->KeyDown(VK_RETURN))
+				option = true;
 			break;
 		default:
 			break;
 		}
 	}
+	if (INPUT->KeyDown(VK_RETURN) && bop) { option = false; bop = false; }
 	else
 	{
 		if (INPUT->KeyDown(VK_DOWN) && optionS < 2) { optionS++; }
@@ -67,6 +69,11 @@ void TitleScene::Render()
 		RENDER->CenterRender(IMAGE->FindImage("how to play ready"), CENTER, 1.2);
 	if (select == 4)
 		RENDER->CenterRender(IMAGE->FindImage("credit ready"), CENTER, 1.2);
+	if (option) {
+		bop = true;
+		RENDER->CenterRender(IMAGE->FindImage("credit"), CENTER, 1.2);
+		if (INPUT->PointUp(VK_LBUTTON, { 1480, 890, 1790, 990 }))	option = false;
+	}
 }
 
 void TitleScene::UIRender()

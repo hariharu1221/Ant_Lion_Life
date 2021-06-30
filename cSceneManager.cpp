@@ -63,13 +63,22 @@ void cSceneManager::ResetScnee(string key, cScene* scene)
 void cSceneManager::ReloadScnee(string key, cScene* scene)
 {
 	SCENE->ChangeScene("nullScene");
-	SCENE->Update();
+	if (nowScene) nowScene->Release();
+	nextScene->Init();
+	nowScene = nextScene;
+	nextScene = nullptr;
 	auto find = m_scenes.find(key);
 	auto temp = find->second;
 	SAFE_DELETE(temp);
 	m_scenes.erase(key);
 	m_scenes.insert(make_pair(key, scene));
 	SCENE->ChangeScene(key);
+}
+
+void cSceneManager::per(float cper, Vec2 pos)
+{
+	colorper = cper;
+	v_pos = pos;
 }
 
 void cSceneManager::PlayerInit()

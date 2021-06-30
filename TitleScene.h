@@ -7,6 +7,7 @@ public:
 	int select = 1;
 	int optionS = 1;
 	bool option = 0;
+	bool bop = false;
 	bool set = false;
 
 	TitleScene();
