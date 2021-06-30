@@ -11,9 +11,9 @@ boss_2::~boss_2()
 
 void boss_2::Update(Vec2 m_pos)
 {
-	if (SCENE->colorper < 80) Skill(m_pos);
+	if (SCENE->colorper < 70) Skill(m_pos);
 
-	if (SCENE->colorper >= 80)
+	if (SCENE->colorper >= 70)
 	{
 		b_die += Delta * 10;
 		if (b_die >= die.size()) b_die = die.size() - 1;

@@ -8,10 +8,6 @@
     <Filter Include="DXUT">
       <UniqueIdentifier>{a43c5c25-0e86-4a20-b64a-883785ff74fd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{2c3d4c8c-5d1a-459a-a05a-a4e4b608a44e}</UniqueIdentifier>
-      <Extensions>fx;fxh;hlsl</Extensions>
-    </Filter>
     <Filter Include="00: Maingame">
       <UniqueIdentifier>{d6325a28-bb5a-434f-8614-2d571b1bfefe}</UniqueIdentifier>
     </Filter>
@@ -59,6 +55,10 @@
     </Filter>
     <Filter Include="02: Object\Player">
       <UniqueIdentifier>{e617ec6b-796a-43ae-8954-cd41cb46394a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{2c3d4c8c-5d1a-459a-a05a-a4e4b608a44e}</UniqueIdentifier>
+      <Extensions>fx;fxh;hlsl</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -236,6 +236,12 @@
     <ClCompile Include="cMABullet.cpp">
       <Filter>02: Object\Bullet\MB</Filter>
     </ClCompile>
+    <ClCompile Include="mob_4.cpp">
+      <Filter>02: Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="boss_4.cpp">
+      <Filter>02: Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -358,6 +364,12 @@
     </ClInclude>
     <ClInclude Include="cMABullet.h">
       <Filter>02: Object\Bullet\MB</Filter>
+    </ClInclude>
+    <ClInclude Include="mob_4.h">
+      <Filter>02: Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="boss_4.h">
+      <Filter>02: Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

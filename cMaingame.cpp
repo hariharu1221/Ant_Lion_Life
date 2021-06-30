@@ -120,5 +120,11 @@ void cMaingame::AddResource()
     IMAGE->AddImage("mob4r", "mob4/right/mob4", 4);
     IMAGE->AddImage("mob4t", "mob4/up/mob4", 4);
     IMAGE->AddImage("mob4b", "mob4/down/mob4", 4);
+    IMAGE->AddImage("boss4l", "boss4/left/boss4", 4);
+    IMAGE->AddImage("boss4r", "boss4/right/boss4", 4);
+    IMAGE->AddImage("boss4t", "boss4/up/boss4", 4);
+    IMAGE->AddImage("boss4b", "boss4/down/boss4", 4);
+    //IMAGE->AddImage("boss4sk1", "boss4/ready/boss4", 4);
+    IMAGE->AddImage("boss4sk2", "boss4/sk2/boss4", 6);
 }
 

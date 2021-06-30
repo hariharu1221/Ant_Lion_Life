@@ -4,8 +4,8 @@
 #include "cBulletAdmin.h"
 #include "TileMap.h"
 #include "cCollison.h"
-#include "boss_3.h"
-#include "mob_3.h"
+#include "boss_4.h"
+#include "mob_4.h"
 
 class Stage_3_0 :
 	public cScene
@@ -14,8 +14,10 @@ class Stage_3_0 :
 	cBulletAdmin* bullet = nullptr;
 	TileMap* tile = nullptr;
 	cCollison* coll = nullptr;
-	boss_3* boss = nullptr;
+	boss_4* boss = nullptr;
 	vector<mob_1*> mob;
+
+
 
 	int stage = 3;
 public:

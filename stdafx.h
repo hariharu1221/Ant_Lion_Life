@@ -16,8 +16,8 @@
 
 #define WI 400
 #define HE 225
-#define coldraw true
-const bool drawbug = true;
+#define coldraw false
+const bool drawbug = false;
 
 using namespace std;
 

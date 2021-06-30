@@ -1,5 +1,5 @@
 #pragma once
-class boss_3
+class boss_4
 {
 public:
 	vector<cBullet*>& m_bullet;
@@ -29,9 +29,8 @@ public:
 	int dir = 0;
 	int sk = 0;
 
-
-	boss_3(vector<cBullet*>& bullet);
-	~boss_3();
+	boss_4(vector<cBullet*>& bullet);
+	~boss_4();
 
 	void Update(Vec2 m_pos, int cell[][CELLSIZEY]);
 	void Move();

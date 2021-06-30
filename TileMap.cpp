@@ -53,6 +53,7 @@ void TileMap::Update()
 	cc = { int(pos.x - x_gap), int(pos.y - y_gap) };
 
 	SCENE->per(coloring_per, pos);
+	if (INPUT->KeyUp(VK_F1)) nextstage = true;
 }
 
 void TileMap::Skill()
@@ -262,7 +263,6 @@ void TileMap::AutoFill()
 	DrawArea(2);
 	second = { 0,0 };
 }
-
 bool TileMap::FloodFill(Vec2 pos, int target, int change)
 {
 	if (target == change) return true;
@@ -372,7 +372,7 @@ void TileMap::Render()
 		if (INPUT->PointUp(VK_LBUTTON, { 610,660,840,730 }))	retry = true;
 		if (INPUT->PointUp(VK_LBUTTON, { 950,660,1290,730 }))	title = true;
 	}
-	if (coloring_per >= 80)  // 80%채우면
+	if (coloring_per >= 70)  // 80%채우면
 	{
 		b_gc += Delta * 10;
 		gc = true;
