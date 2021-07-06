@@ -53,6 +53,42 @@ cRenderManager::~cRenderManager()
 	m_vb->Release();
 }
 
+void cRenderManager::Update()
+{
+}
+
+void cRenderManager::SetCamPos(Vec3 pos)
+{
+	camPos = Vec3(pos.x, pos.y, pos.z + 1);
+	//camLook = pos;
+
+	D3DXMatrixLookAtLH(&matView, &camPos, &camLook, &camUp);
+	g_device->SetTransform(D3DTS_VIEW, &matView);
+}
+
+void cRenderManager::SetCamRot(Vec3 rot)
+{
+	camPos = Vec3(0, 0, 1);
+	camLook = Vec3(0, 0, 0);
+	camUp = Vec3(0, 1, 0);
+
+	D3DXMatrixLookAtLH(&matView, &camPos, &camLook, &camUp);
+	g_device->SetTransform(D3DTS_VIEW, &matView);
+}
+
+void cRenderManager::PlusCamPos(Vec3 pos)
+{
+	camPos = camPos + pos;
+	camLook = camLook + pos;
+
+	D3DXMatrixLookAtLH(&matView, &camPos, &camLook, &camUp);
+	g_device->SetTransform(D3DTS_VIEW, &matView);
+}
+
+void cRenderManager::PlusCamRot(Vec3 rot)
+{
+}
+
 void cRenderManager::CenterRender(cTexture* ptr, Vec2 pos, float size, float rot)
 {
 	D3DXMATRIXA16 matScale, matRot, matPos, matWorld;

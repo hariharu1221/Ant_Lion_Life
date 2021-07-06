@@ -116,7 +116,7 @@ void boss_4::Skill(Vec2 m_pos)
 		alphaacttime++;
 		if (alphaacttime == 10) { alphaacttime = 0; beam = -4; }
 	}
-	if (beam >= -3 && beam <= -2) { ready = true; frame = 0; }
+	if (beam >= -2.2 && beam <= -1.2) { ready = true; frame = 0; }
 
 	beam += Delta;
 }
