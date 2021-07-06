@@ -2,9 +2,7 @@
 #include "cMaingame.h"
 #include "TitleScene.h"
 #include "EndScene.h"
-#include "Stage_1_1.h"
-#include "Stage_1_0.h"
-#include "Stage_2_0.h"
+#include "SelectScene.h"
 
 cMaingame::cMaingame()
 {
@@ -19,6 +17,7 @@ void cMaingame::Init()
     AddResource();
     SCENE->AddScene("TitleScene", new TitleScene);
     SCENE->AddScene("EndScene", new EndScene);
+    SCENE->AddScene("SelectScene", new SelectScene);
     SCENE->AddScene("nullScene", new nullScene);
     SCENE->AddScene("Stage_1_1", new Stage_1_1);
     SCENE->AddScene("Stage_1_0", new Stage_1_0);
