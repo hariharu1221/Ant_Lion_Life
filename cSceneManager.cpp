@@ -20,6 +20,7 @@ void cSceneManager::Update()
 		nextScene->Init();
 		nowScene = nextScene;
 		nextScene = nullptr;
+		RENDER->SetCam();
 	}
 }
 

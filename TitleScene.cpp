@@ -24,7 +24,6 @@ void TitleScene::Update()
 		SCENE->ResetScnee("Stage_2_0", new Stage_2_0);
 		SCENE->ResetScnee("Stage_3_0", new Stage_3_0);
 	}
-	if (INPUT->KeyPress('Z')) { RENDER->PlusCamPos(Vec3(0.1,0,0)); }
 	if (option == false)
 	{
 		if (INPUT->KeyDown(VK_UP) && select >= 3) { select -= 2; }

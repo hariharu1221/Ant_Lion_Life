@@ -29,6 +29,7 @@ void cMaingame::Init()
 
 void cMaingame::Update()
 {
+    RENDER->Update();
     SCENE->Update();
     INPUT->Update();
     PART->Update();
@@ -82,6 +83,8 @@ void cMaingame::AddResource()
     IMAGE->AddImage("gvtext", "gv/gvb/gve");
     IMAGE->AddImage("gctext", "gc/gcb");
     IMAGE->AddImage("credit", "credit");
+    IMAGE->AddImage("selectS", "selectS");
+    IMAGE->AddImage("ping", "ping");
 
     IMAGE->AddImage("credit ready", "credit ready");
     IMAGE->AddImage("end the game ready", "end the game ready");

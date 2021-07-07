@@ -10,6 +10,12 @@ public:
 	bool bop = false;
 	bool set = false;
 
+	bool s1ready = false;
+	bool s2ready = false;
+	bool s3ready = false;
+	bool s4ready = false;
+	float timer = 0;
+
 	SelectScene();
 	virtual ~SelectScene();
 
