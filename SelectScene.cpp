@@ -28,11 +28,7 @@ void SelectScene::Update()
 		{
 		case 1:
 			if (INPUT->KeyDown(VK_RETURN))
-			{
 				s1ready = true;
-				RENDER->TojSize(2.5, 0.0001, 0.0001);
-				RENDER->ToCamPos(Vec3(511, 320, 0), 1, 1);
-			}
 			break;
 		case 2:
 			if (INPUT->KeyDown(VK_RETURN))
@@ -47,29 +43,39 @@ void SelectScene::Update()
 				s4ready = true;
 			break;
 		}
+		if (INPUT->KeyDown(VK_RETURN))
+			RENDER->TojSize(2, 1, 3);
 	}
 
 	if (s1ready)
 	{
-		if (timer >= 2.5)
+		if (timer <= 1)
+			RENDER->PlusCamPos(Vec3(-5 * (1 + timer), 2 * (1 + timer), 0));
+		if (timer >= 1)
 			SCENE->ChangeScene("Stage_1_0");
 		timer += Delta;
 	}
 	if (s2ready)
 	{
-		if (timer >= 4)
+		if (timer <= 1)
+			RENDER->PlusCamPos(Vec3(-4 * (1 + timer), -3.5 * (1 + timer), 0));
+		if (timer >= 1)
 			SCENE->ChangeScene("Stage_1_1");
 		timer += Delta;
 	}
 	if (s3ready)
 	{
-		if (timer >= 4)
+		if (timer <= 1)
+			RENDER->PlusCamPos(Vec3(3.5 * (1 + timer), -1.8 * (1 + timer), 0));
+		if (timer >= 1)
 			SCENE->ChangeScene("Stage_2_0");
 		timer += Delta;
 	}
 	if (s4ready)
 	{
-		if (timer >= 4)
+		if (timer <= 1)
+			RENDER->PlusCamPos(Vec3(7 * (1 + timer), 1.8 * (1 + timer), 0));
+		if (timer >= 1)
 			SCENE->ChangeScene("Stage_3_0");
 		timer += Delta;
 	}
@@ -86,6 +92,7 @@ void SelectScene::Render()
 
 void SelectScene::UIRender()
 {
+	UI->CenterRender2(IMAGE->FindImage("black"), Vec2(0, 0), 1, (timer) * 255);
 }
 
 void SelectScene::Release()

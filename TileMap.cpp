@@ -54,6 +54,38 @@ void TileMap::Update()
 
 	SCENE->per(coloring_per, pos);
 	if (INPUT->KeyUp(VK_F1)) nextstage = true;
+
+	if (camera) {
+		RENDER->SetjSize(1.3);
+
+		if (RENDER->camPos.x > pos.x - 870 || RENDER->camPos.x < pos.x - 1050
+			|| RENDER->camPos.y > -pos.y + 650 || RENDER->camPos.y < -pos.y + 450)
+		{
+			if (btimer < 8)		btimer += Delta * 8;
+			else btimer = 4;
+
+			if (b_cpos < 4)	b_cpos += (Delta / 4) * btimer;
+			else b_cpos = 4;
+		}
+		else
+		{
+			if (btimer > 1)		btimer -= Delta * 16;
+			else btimer = 1;
+
+			if (b_cpos > 1)		b_cpos -= (Delta / 4) * btimer;
+			else b_cpos = 1;
+		}
+	
+		if (RENDER->camPos.x > pos.x - 920)			RENDER->PlusCamPos(Vec3(-2 * b_cpos, 0, 0));
+		else if (RENDER->camPos.x < pos.x - 1000)	RENDER->PlusCamPos(Vec3(2 * b_cpos, 0, 0));
+		
+		if (RENDER->camPos.y > -pos.y + 600)		RENDER->PlusCamPos(Vec3(0, -2 * b_cpos, 0));
+		else if (RENDER->camPos.y < -pos.y + 500)	RENDER->PlusCamPos(Vec3(0, 2 * b_cpos, 0));
+
+		//RENDER->SetCamPos(Vec3(pos.x - 960, -pos.y + 540, 0));
+		if (INPUT->KeyDown('Y')) { camera = false; RENDER->SetCam(); }
+	}
+	else if (INPUT->KeyDown('Y')) camera = true;
 }
 
 void TileMap::Skill()
@@ -153,6 +185,16 @@ void TileMap::Move()
 				if (!Near(KEY, 3))
 					DrawLine();
 		}
+	}
+
+	if (INPUT->KeyPress(VK_RIGHT) || INPUT->KeyPress(VK_LEFT) ||
+		INPUT->KeyPress(VK_UP) || INPUT->KeyPress(VK_DOWN))
+	{
+
+	}
+	else
+	{
+
 	}
 }
 
@@ -394,7 +436,8 @@ void TileMap::SUI()
 	RECT tmp = { 0,0,1920 * (timer / 100),100 };
 	if (pos.y <= 160) { y -= Delta * 70; if (y < -100) y = -100; }
 	else { y += Delta * 70; if (y > 0) y = 0; }
-	if (pos.y <= 90)
+	if (camera) y = 0;
+	if (pos.y <= 90 && camera == false)
 	{
 		UI->CenterRender2(IMAGE->FindImage("ui_bg"), Vec2(0, y / 1.2 - 50), 1, 90);
 		UI->CropRender2(IMAGE->FindImage("timebar"), Vec2(0, y / 3), tmp, 1, 60);
@@ -417,7 +460,8 @@ void TileMap::SUI()
 	}
 
 
-	if (pos.x <= 770 && pos.y >= 930 && pos.y <= 1000)	UI->CropRender2(IMAGE->FindImage("hp"), Vec2(0, 0), hpb, 1, 100);
+	if (pos.x <= 770 && pos.y >= 930 && pos.y <= 1000 && camera == false)	
+		UI->CropRender2(IMAGE->FindImage("hp"), Vec2(0, 0), hpb, 1, 100);
 	else	UI->CropRender2(IMAGE->FindImage("hp"), Vec2(0, 0), hpb, 1);
 
 	if (gv)

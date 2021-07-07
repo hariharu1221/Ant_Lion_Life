@@ -57,25 +57,23 @@ void cRenderManager::Update()
 {
 	if (campos == true)
 	{
+		timer += Delta * acc[0];
 		Vec3 pos;
 		D3DXVec3Normalize(&pos, &(ncamPos - camPos));
 		camPos += pos * timer * 100 * tospeed[0];
 		D3DXVec3Normalize(&pos, &(ncamLook - camLook));
 		camLook += pos * timer * 100 * tospeed[0];
-		timer += Delta * acc[0];
 		if (size[0] && camPos >= ncamPos)
 		{
 			camPos = ncamPos;
-			camLook = ncamPos;
-			campos = false;
-			timer = 0;
+			camLook = ncamLook;
+			Set();
 		}
 		else if (size[0] == false && ncamPos >= camPos)
 		{
 			camPos = ncamPos;
-			camLook = ncamPos;
-			campos = false;
-			timer = 0;
+			camLook = ncamLook;
+			Set();
 		}
 
 		D3DXMatrixLookAtLH(&matView, &camPos, &camLook, &camUp);
@@ -84,16 +82,12 @@ void cRenderManager::Update()
 
 	if (jsize == true)
 	{
-		if (true) {
-			timer += Delta * acc[2] * 0.0001;
-			onesize += Delta * timer * tospeed[2];
-			if (onesize >= tojsize) { onesize = tojsize; Set(); }
-			projPos = Vec3(-WINSIZEX / onesize, WINSIZEY / onesize, 100);
-			D3DXMatrixOrthoLH(&matProj, projPos.x, projPos.y, 0, projPos.z);
-			g_device->SetTransform(D3DTS_PROJECTION, &matProj);
-			to = 0;
-		}
-		to += Delta;
+		timer += Delta * acc[2] * 1;
+		onesize += Delta * timer * tospeed[2];
+		if (onesize >= tojsize) { onesize = tojsize; Set(); }
+		projPos = Vec3(-WINSIZEX / onesize, WINSIZEY / onesize, 100);
+		D3DXMatrixOrthoLH(&matProj, projPos.x, projPos.y, 0, projPos.z);
+		g_device->SetTransform(D3DTS_PROJECTION, &matProj);
 	}
 }
 
@@ -145,6 +139,26 @@ void cRenderManager::PlusCamRot(Vec3 rot)
 void cRenderManager::PlusjSize(float size)
 {
 	projPos = Vec3(projPos.x / size, projPos.y / size, 100);
+	D3DXMatrixOrthoLH(&matProj, projPos.x, projPos.y, 0, projPos.z);
+	g_device->SetTransform(D3DTS_PROJECTION, &matProj);
+}
+
+void cRenderManager::SetCamPos(Vec3 pos)
+{
+	camPos = Vec3(pos.x, pos.y, pos.z + 1);
+	camLook = pos;
+
+	D3DXMatrixLookAtLH(&matView, &camPos, &camLook, &camUp);
+	g_device->SetTransform(D3DTS_VIEW, &matView);
+}
+
+void cRenderManager::SetCamRot(Vec3 pos)
+{
+}
+
+void cRenderManager::SetjSize(float size)
+{
+	projPos = Vec3(float(-WINSIZEX / size), float(WINSIZEY / size), 100);
 	D3DXMatrixOrthoLH(&matProj, projPos.x, projPos.y, 0, projPos.z);
 	g_device->SetTransform(D3DTS_PROJECTION, &matProj);
 }

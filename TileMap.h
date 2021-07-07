@@ -28,6 +28,10 @@ public:
 	bool nextstage = false;
 	bool title = false;
 
+	bool camera = false;
+	float b_cpos = 1;
+	float btimer = 1;
+
 	float b_start = 0;
 
 	float timer = 300;

@@ -85,6 +85,7 @@ void cMaingame::AddResource()
     IMAGE->AddImage("credit", "credit");
     IMAGE->AddImage("selectS", "selectS");
     IMAGE->AddImage("ping", "ping");
+    IMAGE->AddImage("black", "black");
 
     IMAGE->AddImage("credit ready", "credit ready");
     IMAGE->AddImage("end the game ready", "end the game ready");

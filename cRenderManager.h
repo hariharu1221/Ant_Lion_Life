@@ -43,6 +43,9 @@ public:
 	void PlusCamPos(Vec3 pos);
 	void PlusCamRot(Vec3 rot);
 	void PlusjSize(float size);
+	void SetCamPos(Vec3 pos);
+	void SetCamRot(Vec3 pos);
+	void SetjSize(float size);
 	void SetCam();
 	void Set();
 	void CamTo();
