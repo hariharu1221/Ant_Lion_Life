@@ -18,6 +18,8 @@
 #define HE 225
 #define coldraw false
 const bool drawbug = false;
+const bool esct = false;
+const bool notebook = true;
 
 using namespace std;
 

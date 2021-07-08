@@ -16,6 +16,11 @@ void SelectScene::Init()
 	s2ready = false;
 	s3ready = false;
 	s4ready = false;
+
+	if (notebook)
+	{
+		aa = 0.5;
+	}
 }
 
 void SelectScene::Update()
@@ -43,41 +48,43 @@ void SelectScene::Update()
 				s4ready = true;
 			break;
 		}
-		if (INPUT->KeyDown(VK_RETURN))
+		if (INPUT->KeyDown(VK_RETURN) && notebook == false)
 			RENDER->TojSize(2, 1, 3);
+		if (INPUT->KeyDown(VK_RETURN) && notebook)
+			RENDER->TojSize(3, 1, 3);
 	}
 
 	if (s1ready)
 	{
 		if (timer <= 1)
-			RENDER->PlusCamPos(Vec3(-5 * (1 + timer), 2 * (1 + timer), 0));
+			RENDER->PlusCamPos(Vec3(-5 * (1 + timer) * aa, 2 * (1 + timer) * aa, 0));
 		if (timer >= 1)
 			SCENE->ChangeScene("Stage_1_0");
-		timer += Delta;
+			timer += Delta;
 	}
 	if (s2ready)
 	{
 		if (timer <= 1)
-			RENDER->PlusCamPos(Vec3(-4 * (1 + timer), -3.5 * (1 + timer), 0));
+			RENDER->PlusCamPos(Vec3(-4 * (1 + timer) * aa, -3.5 * (1 + timer) * aa, 0));
 		if (timer >= 1)
 			SCENE->ChangeScene("Stage_1_1");
-		timer += Delta;
+			timer += Delta;
 	}
 	if (s3ready)
 	{
 		if (timer <= 1)
-			RENDER->PlusCamPos(Vec3(3.5 * (1 + timer), -1.8 * (1 + timer), 0));
+			RENDER->PlusCamPos(Vec3(3.5 * (1 + timer) * aa, -1.8 * (1 + timer) * aa, 0));
 		if (timer >= 1)
 			SCENE->ChangeScene("Stage_2_0");
-		timer += Delta;
+			timer += Delta;
 	}
 	if (s4ready)
 	{
 		if (timer <= 1)
-			RENDER->PlusCamPos(Vec3(7 * (1 + timer), 1.8 * (1 + timer), 0));
+			RENDER->PlusCamPos(Vec3(7 * (1 + timer) * aa, 1.8 * (1 + timer) * aa, 0));
 		if (timer >= 1)
 			SCENE->ChangeScene("Stage_3_0");
-		timer += Delta;
+			timer += Delta;
 	}
 }
 

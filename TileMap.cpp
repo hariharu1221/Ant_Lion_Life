@@ -53,7 +53,10 @@ void TileMap::Update()
 	cc = { int(pos.x - x_gap), int(pos.y - y_gap) };
 
 	SCENE->per(coloring_per, pos);
+	if (INPUT->KeyUp(VK_ESCAPE)) SCENE->ChangeScene("TitleScene");
 	if (INPUT->KeyUp(VK_F1)) nextstage = true;
+	if (INPUT->KeyUp(VK_F2)) speed = 8;
+	if (INPUT->KeyUp(VK_F3)) hp++;
 
 	if (camera) {
 		RENDER->SetjSize(1.3);
@@ -511,7 +514,7 @@ void TileMap::SetUp()
 	temp = 0;
 
 	hp = 5;
-	speed = 8;
+	speed = 4;
 	timer = 100;
 	second = { 0,0 };
 	frame = 0;

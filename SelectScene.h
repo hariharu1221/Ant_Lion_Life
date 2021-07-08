@@ -15,6 +15,7 @@ public:
 	bool s3ready = false;
 	bool s4ready = false;
 	float timer = 0;
+	float aa = 1;
 
 	SelectScene();
 	virtual ~SelectScene();
