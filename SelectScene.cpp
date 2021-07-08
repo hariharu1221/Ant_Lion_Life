@@ -11,7 +11,7 @@ SelectScene::~SelectScene()
 
 void SelectScene::Init()
 {
-	float timer = 0;
+	timer = 0;
 	s1ready = false;
 	s2ready = false;
 	s3ready = false;
